@@ -53,19 +53,5 @@ jobs:
           test -f out/404.html || { echo "out/404.html manquant"; exit 1; }
           echo "Élagage conforme."
 
-      # Le jeu repose entièrement sur cette table : une silhouette décentrée ou
-      # un pays manquant ne se voit qu'en jouant.
       - name: Vérifier la table des pays
-        run: npx tsx --eval "
-          const { COUNTRIES } = await import('./src/data/countries.ts');
-          if (COUNTRIES.length < 150) throw new Error('seulement ' + COUNTRIES.length + ' pays');
-          for (const c of COUNTRIES) {
-            const n = c.path.match(/-?\d+\.?\d*/g).map(Number);
-            const xs = n.filter((_, i) => i % 2 === 0), ys = n.filter((_, i) => i % 2 === 1);
-            const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
-            if (Math.abs(cx - 50) > 0.5 || Math.abs(cy - 50) > 0.5) {
-              throw new Error(c.code + ' est décentré : (' + cx + ', ' + cy + ')');
-            }
-          }
-          console.log(COUNTRIES.length + ' pays, tous centrés.');
-          "
+        run: npx tsx scripts/check-countries.mts
