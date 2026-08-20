@@ -127,7 +127,7 @@ export const en: Dictionary = {
     intro: {
         heading: 'One country a day, six guesses',
         paragraphs: [
-            'Azimut is a daily geography game. Every day at midnight a new country is drawn from the 175 in the world, and its outline is all you get to recognise it. No sign-up, no app to install: the whole game fits in one page.',
+            'Azimut is a daily geography game. Every day at midnight a new country is drawn from the {count} in the world, and its outline is all you get to recognise it. No sign-up, no app to install: the whole game fits in one page.',
             'With every guess, the dial shows how far you are from the target country and which way it lies. A wild guess is never wasted — it rules out a region, and the next one closes in. That back and forth between distance and bearing is what replaces the map.',
             'Everyone plays the same puzzle wherever they are: the game day follows Paris time, so you can compare your result with friends without anyone playing ahead.',
         ],

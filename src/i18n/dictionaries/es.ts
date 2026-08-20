@@ -127,7 +127,7 @@ export const es: Dictionary = {
     intro: {
         heading: 'Un país al día, seis intentos',
         paragraphs: [
-            'Azimut es un juego de geografía diario. Cada día a medianoche se sortea un país entre los 175 del mundo, y solo cuentas con su silueta para reconocerlo. Sin registro y sin aplicación que instalar: el juego cabe en una sola página.',
+            'Azimut es un juego de geografía diario. Cada día a medianoche se sortea un país entre los {count} del mundo, y solo cuentas con su silueta para reconocerlo. Sin registro y sin aplicación que instalar: el juego cabe en una sola página.',
             'En cada intento, el cuadrante muestra la distancia que te separa del país buscado y la dirección en la que se encuentra. Un intento lejano nunca se pierde: acota una región, y el siguiente se acerca. Ese vaivén entre distancia y rumbo es lo que sustituye al mapa.',
             'La partida es la misma para todo el mundo, estés donde estés: el día de juego sigue la hora de París, así puedes comparar tu resultado con tus amigos sin que nadie juegue por adelantado.',
         ],

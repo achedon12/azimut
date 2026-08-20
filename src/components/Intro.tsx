@@ -2,7 +2,9 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import type { Dictionary } from '@/i18n';
 import type { Locale } from '@/i18n/config';
+import { format } from '@/i18n/format';
 import { path } from '@/i18n/routes';
+import { COUNTRIES } from '@/data/countries';
 
 /**
  * Le texte de présentation, sous le jeu.
@@ -20,7 +22,7 @@ export function Intro({ locale, dictionary }: { locale: Locale; dictionary: Dict
             <h2 className="text-base font-semibold tracking-tight">{d.heading}</h2>
             <div className="mt-3 flex flex-col gap-3 text-[0.85rem] leading-relaxed text-fg-muted">
                 {d.paragraphs.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                    <p key={paragraph}>{format(paragraph, { count: COUNTRIES.length })}</p>
                 ))}
             </div>
             <Link
