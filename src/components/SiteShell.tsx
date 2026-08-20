@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import { display, mono } from '@/fonts';
 import type { Locale } from '@/i18n/config';
+import { MatomoScript } from './MatomoScript';
+import { ServiceWorker } from './ServiceWorker';
 import { ThemeScript } from './ThemeScript';
 
 // Enveloppe <html>/<body>, et rien d'autre : l'en-tête a besoin de savoir
@@ -16,6 +18,8 @@ export function SiteShell({ locale, children }: { locale: Locale; children: Reac
             <body className="flex min-h-dvh flex-col antialiased">
                 <ThemeScript />
                 {children}
+                <ServiceWorker />
+                <MatomoScript />
             </body>
         </html>
     );

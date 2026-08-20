@@ -31,12 +31,20 @@
 
     /* Échelle de proximité, du plus froid au plus chaud. Cinq paliers : en
        dessous les sauts se voient, au-dessus deux essais voisins deviennent
-       indiscernables. */
-    --step-1: #2a6f97;
-    --step-2: #1f8a8a;
-    --step-3: #9a7b12;
-    --step-4: #bf5a1b;
-    --step-5: #b02e22;
+       indiscernables.
+       ⚠️ La CLARTÉ varie autant que la teinte, et c'est délibéré. Les teintes
+       chaudes tombent sur la même ligne de confusion en vision deutéranope :
+       l'ancienne échelle y séparait deux paliers voisins de ΔE 3,3, autant dire
+       pas du tout. La clarté, elle, survit à tous les daltonismes.
+       Vérifié : ΔE ≥ 13 sur les quatre visions simulées, contraste ≥ 4,7 sur le
+       fond — l'ancienne palette claire tombait à 3,4, sous le minimum, ce que
+       Lighthouse ne voyait pas puisque ces couleurs n'apparaissent qu'après un
+       essai. */
+    --step-1: #205aa3;
+    --step-2: #2b7266;
+    --step-3: #865702;
+    --step-4: #692d03;
+    --step-5: #520101;
     --win: #0f6b45;
     --win-soft: #d7ecdf;
 }
@@ -56,11 +64,12 @@
         --ring: #4cc9f0;
         --rings: rgb(76 201 240 / 0.07);
 
-        --step-1: #4ca8dc;
-        --step-2: #3fc9c0;
-        --step-3: #e0b64a;
-        --step-4: #f08b4a;
-        --step-5: #f2604a;
+        /* Voir la note du thème clair : ΔE ≥ 10,4 sur les quatre visions. */
+        --step-1: #3d8fd4;
+        --step-2: #37cfc2;
+        --step-3: #f7dc6b;
+        --step-4: #f0913c;
+        --step-5: #dd4b3a;
         --win: #4fd18a;
         --win-soft: #08281c;
     }
@@ -82,11 +91,11 @@
     --ring: #4cc9f0;
     --rings: rgb(76 201 240 / 0.07);
 
-    --step-1: #4ca8dc;
-    --step-2: #3fc9c0;
-    --step-3: #e0b64a;
-    --step-4: #f08b4a;
-    --step-5: #f2604a;
+    --step-1: #3d8fd4;
+    --step-2: #37cfc2;
+    --step-3: #f7dc6b;
+    --step-4: #f0913c;
+    --step-5: #dd4b3a;
     --win: #4fd18a;
     --win-soft: #08281c;
 }

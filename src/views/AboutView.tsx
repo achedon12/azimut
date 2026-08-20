@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { getDictionary } from '@/i18n';
 import type { Locale } from '@/i18n/config';
 import { path } from '@/i18n/routes';
+import { ClearData } from '@/components/ClearData';
 import { AUTHOR } from '@/lib/site';
 
 /** Le jeton `{author}` devient un lien. Les dictionnaires ne portent que des
@@ -64,6 +65,16 @@ export function AboutView({ locale }: { locale: Locale }) {
                 {d.about.back}
                 <ArrowRight aria-hidden="true" className="size-4" />
             </Link>
+
+            {/* Les données du joueur vivent dans son navigateur : il doit
+                pouvoir les reprendre. */}
+            <section className="mt-10 border-t border-border-subtle pt-6">
+                <h2 className="text-xl font-semibold tracking-tight">{d.data.heading}</h2>
+                <p className="mt-2 text-[0.9rem] leading-relaxed text-fg-muted">{d.data.body}</p>
+                <div className="mt-4">
+                    <ClearData dictionary={d} />
+                </div>
+            </section>
         </article>
     );
 }

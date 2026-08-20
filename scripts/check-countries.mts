@@ -1,3 +1,4 @@
+import { ALIASES } from '../src/data/aliases.ts';
 import { COUNTRIES } from '../src/data/countries.ts';
 
 /**
@@ -46,4 +47,14 @@ for (const country of COUNTRIES) {
     }
 }
 
-console.log(`check-countries: ${COUNTRIES.length} pays, tous nommés et centrés.`);
+// Un alias qui vise un code absent ne fait rien : la recherche l'ignore en
+// silence, et personne ne s'aperçoit que « vatican » ne trouve rien.
+const orphans = Object.keys(ALIASES).filter((code) => !codes.has(code));
+if (orphans.length > 0) {
+    throw new Error(`Alias vers des codes absents de la table : ${orphans.join(', ')}`);
+}
+
+const aliasCount = Object.values(ALIASES).reduce((n, list) => n + list.length, 0);
+console.log(
+    `check-countries: ${COUNTRIES.length} pays, tous nommés et centrés, ${aliasCount} alias valides.`,
+);

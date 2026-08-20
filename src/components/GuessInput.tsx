@@ -3,16 +3,25 @@
 import { useId, useMemo, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
 import type { Country } from '@/data/countries';
+import { ALIASES } from '@/data/aliases';
 import type { GuessResult } from '@/lib/gameStore';
 import type { Dictionary } from '@/i18n';
 import type { Locale } from '@/i18n/config';
 
-/** Sans accents ni casse : « perou » doit trouver « Pérou ». */
+/**
+ * Forme comparable d'un nom : sans accents, sans casse, sans ponctuation.
+ *
+ * ⚠️ Les séparateurs deviennent des ESPACES. Sans ça, « etats unis » ne trouvait
+ * pas « États-Unis », et le défaut touchait toute la Guinée-Bissau, la
+ * Bosnie-Herzégovine, la Côte d'Ivoire et Trinité-et-Tobago — un joueur tape
+ * rarement le trait d'union.
+ */
 function fold(value: string): string {
     return value
         .normalize('NFD')
-        .replace(/[̀-ͯ]/g, '')
+        .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
         .trim();
 }
 
@@ -35,21 +44,45 @@ export function GuessInput({
     const listId = useId();
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // Les formes comparables sont calculées UNE fois, pas à chaque frappe :
+    // 168 pays × leurs alias, refoldés à chaque lettre, se sentait sur mobile.
+    const index = useMemo(
+        () =>
+            countries.map((c) => ({
+                c,
+                name: c.names[locale],
+                folded: fold(c.names[locale]),
+                aliases: (ALIASES[c.code] ?? []).map(fold),
+            })),
+        [countries, locale],
+    );
+
     const matches = useMemo(() => {
         const needle = fold(value);
         if (!needle) return [];
-        return countries
-            .map((c) => ({ c, name: c.names[locale] }))
-            .filter(({ name }) => fold(name).includes(needle))
-            // Ce qui COMMENCE par la saisie remonte : en tapant « ir », on
-            // cherche l'Iran ou l'Irlande, pas le Kiribati.
-            .sort((a, b) => {
-                const sa = fold(a.name).startsWith(needle) ? 0 : 1;
-                const sb = fold(b.name).startsWith(needle) ? 0 : 1;
-                return sa - sb || a.name.localeCompare(b.name, locale);
-            })
-            .slice(0, 6);
-    }, [countries, locale, value]);
+
+        /** Plus le rang est bas, plus la proposition remonte. */
+        const rank = (entry: (typeof index)[number]): number | null => {
+            // Un alias EXACT passe devant tout : « uk » doit donner le
+            // Royaume-Uni, pas l'Ukraine dont le nom commence par « uk ».
+            if (entry.aliases.includes(needle)) return 0;
+            if (entry.folded.startsWith(needle)) return 1;
+            if (entry.aliases.some((a) => a.startsWith(needle))) return 2;
+            if (entry.folded.includes(needle)) return 3;
+            if (entry.aliases.some((a) => a.includes(needle))) return 4;
+            return null;
+        };
+
+        return index
+            .map((entry) => ({ entry, score: rank(entry) }))
+            .filter((r): r is { entry: (typeof index)[number]; score: number } => r.score !== null)
+            .sort(
+                (a, b) =>
+                    a.score - b.score || a.entry.name.localeCompare(b.entry.name, locale),
+            )
+            .slice(0, 6)
+            .map(({ entry }) => ({ c: entry.c, name: entry.name }));
+    }, [index, locale, value]);
 
     function submit(code?: string) {
         const chosen = code ?? matches[active]?.c.code;

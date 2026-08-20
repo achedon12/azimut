@@ -190,6 +190,45 @@ const EXCLUDED: Record<string, string> = {
     PR: 'Territoire des États-Unis.',
 };
 
+/** Les continents de Natural Earth, ramenés aux clés du dictionnaire. */
+const CONTINENTS: Record<string, string> = {
+    Africa: 'africa',
+    Asia: 'asia',
+    Europe: 'europe',
+    'North America': 'northAmerica',
+    'South America': 'southAmerica',
+    Oceania: 'oceania',
+};
+
+/**
+ * Silhouette du monde entier, en projection équirectangulaire.
+ *
+ * Sert de fond à la mini-carte de fin de partie : un seul chemin partagé par
+ * les 168 pays, plutôt qu'une carte par pays. Simplifié beaucoup plus fort que
+ * les silhouettes du jeu — à cette taille, le détail ne se voit pas et ne
+ * ferait que peser.
+ */
+function worldPath(features: typeof geojson.features): string {
+    const parts: string[] = [];
+    for (const f of features) {
+        for (const ring of rings(f.geometry)) {
+            // Les îlots sous ce seuil disparaissent à l'écran : les garder
+            // n'ajouterait que des octets.
+            if (ring.length < 8) continue;
+            const simple = simplify(ring, 0.9);
+            if (simple.length < 4) continue;
+            parts.push(
+                'M' +
+                    simple
+                        .map(([lon, lat]) => `${(lon + 180).toFixed(1)} ${(90 - lat).toFixed(1)}`)
+                        .join('L') +
+                    'Z',
+            );
+        }
+    }
+    return parts.join('');
+}
+
 const countries = geojson.features
     .filter((f) => {
         const code = f.properties.ISO_A2_EH;
@@ -216,6 +255,12 @@ const countries = geojson.features
             },
             center: centroid(largest),
             path: outline(all),
+            // Clé, pas un libellé : le continent est traduit dans les
+            // dictionnaires, comme le reste de l'interface.
+            continent: CONTINENTS[f.properties.CONTINENT!] ?? 'other',
+            // Estimation Natural Earth. Sert à situer le pays en fin de partie,
+            // pas à donner un chiffre exact — d'où l'arrondi à l'affichage.
+            population: Number(f.properties.POP_EST) || 0,
         };
     })
     .sort((a, b) => a.code.localeCompare(b.code));
@@ -227,6 +272,15 @@ const source = `// FICHIER GÉNÉRÉ — ne pas modifier à la main.
 // langues, le centre de sa masse principale, et sa silhouette en chemin SVG
 // projetée dans un carré de 100 unités.
 
+export type Continent =
+    | 'africa'
+    | 'asia'
+    | 'europe'
+    | 'northAmerica'
+    | 'southAmerica'
+    | 'oceania'
+    | 'other';
+
 export type Country = {
     code: string;
     names: { fr: string; en: string; es: string; de: string };
@@ -234,11 +288,36 @@ export type Country = {
     center: [number, number];
     /** Chemin SVG dans un viewBox 0 0 100 100. */
     path: string;
+    continent: Continent;
+    /** Estimation Natural Earth, arrondie à l'affichage. */
+    population: number;
 };
 
 export const COUNTRIES: readonly Country[] = ${JSON.stringify(countries, null, 0)};
+
 `;
 
 await writeFile(join(ROOT, 'src/data/countries.ts'), source);
-const size = Buffer.byteLength(source) / 1024;
-console.log(`src/data/countries.ts — ${countries.length} pays, ${size.toFixed(0)} Ko`);
+console.log(
+    `src/data/countries.ts — ${countries.length} pays, ${(Buffer.byteLength(source) / 1024).toFixed(0)} Ko`,
+);
+
+// Fichier SÉPARÉ : la carte ne sert qu'à l'écran de fin. La laisser dans
+// `countries.ts` la ferait charger avec le jeu, alors qu'elle n'est utile
+// qu'une fois la partie terminée.
+const world = `// FICHIER GÉNÉRÉ — ne pas modifier à la main.
+// Produit par \`npm run countries\` depuis Natural Earth 110m (domaine public).
+
+/**
+ * Le monde entier en projection équirectangulaire, viewBox \`0 0 360 180\`.
+ *
+ * Un seul chemin pour tous les pays : la mini-carte de fin de partie s'en sert
+ * de fond et n'y ajoute qu'un point. Simplifié beaucoup plus fort que les
+ * silhouettes du jeu — à cette taille le détail ne se voit pas et ne ferait que
+ * peser.
+ */
+export const WORLD_PATH = ${JSON.stringify(worldPath(geojson.features))};
+`;
+
+await writeFile(join(ROOT, 'src/data/world.ts'), world);
+console.log(`src/data/world.ts — carte du monde, ${(Buffer.byteLength(world) / 1024).toFixed(0)} Ko`);

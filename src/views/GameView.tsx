@@ -1,10 +1,11 @@
 'use client';
 
 import { useMemo, useState, useSyncExternalStore } from 'react';
-import { Check, Share2 } from 'lucide-react';
+import { Check, Lightbulb, Share2 } from 'lucide-react';
 import Link from 'next/link';
 import { CalendarClock, RotateCcw } from 'lucide-react';
 import { Countdown } from '@/components/Countdown';
+import { CountryCard } from '@/components/CountryCard';
 import { GuessInput } from '@/components/GuessInput';
 import { GuessSlot } from '@/components/GuessSlot';
 import { Radar, type Blip } from '@/components/Radar';
@@ -28,6 +29,9 @@ export function GameView({ locale }: { locale: Locale }) {
     const { day, guesses, isToday } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     const stats = useSyncExternalStore(subscribeStats, getStatsSnapshot, getStatsServerSnapshot);
     const [copied, setCopied] = useState(false);
+    // Le JOUR pour lequel l'indice a été demandé : sans lui, l'indice resterait
+    // affiché en passant à une autre partie depuis le calendrier.
+    const [hintFor, setHintFor] = useState<string | null>(null);
 
     const target = useMemo(() => (day ? countryOfDay(day) : null), [day]);
 
@@ -140,6 +144,31 @@ export function GameView({ locale }: { locale: Locale }) {
                         disabled={!day}
                         onGuess={(code) => addGuess(code)}
                     />
+                    {/* L'indice n'apparaît qu'après trois essais, et il faut le
+                        demander : proposé d'emblée, il retirerait sa difficulté
+                        au jeu ; jamais proposé, il laisse abandonner sur un pays
+                        qu'on ne pouvait pas situer. */}
+                    {target && guesses.length >= 3 && (
+                        <div className="text-center text-[0.8rem]">
+                            {hintFor === day ? (
+                                <p className="text-fg-muted">
+                                    {format(d.country.hintGiven, {
+                                        continent: d.continents[target.continent],
+                                    })}
+                                </p>
+                            ) : (
+                                <button
+                                    type="button"
+                                    onClick={() => setHintFor(day)}
+                                    className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 transition-colors hover:text-accent hover:underline"
+                                >
+                                    <Lightbulb aria-hidden="true" className="size-3.5" />
+                                    {d.country.hintReveal}
+                                </button>
+                            )}
+                        </div>
+                    )}
+
                     <p aria-live="polite" className="sr-only">
                         {format(remaining === 1 ? d.game.attemptsLeft : d.game.attemptsLeftPlural, {
                             count: remaining,
@@ -171,6 +200,8 @@ export function GameView({ locale }: { locale: Locale }) {
                                 </p>
                             )}
                         </div>
+
+                        <CountryCard country={target} locale={locale} dictionary={d} />
 
                         {isToday ? (
                             <StatsPanel

@@ -67,3 +67,18 @@ export function saveAll(games: Saved): void {
         // Idem : l'échec d'écriture ne doit pas interrompre la partie.
     }
 }
+
+/**
+ * Efface tout ce que le jeu garde dans ce navigateur.
+ *
+ * Les clés sont nommées une à une plutôt que d'appeler `localStorage.clear()` :
+ * le stockage est partagé par origine, et tout effacer emporterait aussi les
+ * préférences d'un autre outil servi depuis le même domaine.
+ */
+export function clearAll(): void {
+    try {
+        for (const key of [KEY, LEGACY_KEY, 'azimut:stats']) localStorage.removeItem(key);
+    } catch {
+        // Stockage indisponible : il n'y a rien à effacer.
+    }
+}
