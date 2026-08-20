@@ -7,7 +7,8 @@ proposition la **distance** et le **cap** qui vous séparent de la réponse.
 
 Le même pays pour tout le monde, chaque jour, sans compte et sans publicité. Un
 jour manqué n'est pas perdu : toutes les parties passées restent jouables depuis
-la page **Archives**, un calendrier où l'on choisit sa date.
+la page **Archives**, un calendrier où l'on choisit sa date. Le jeu commence au
+1er janvier 2026 : 232 parties sont jouables dès l'ouverture.
 
 ---
 

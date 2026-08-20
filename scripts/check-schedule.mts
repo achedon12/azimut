@@ -20,34 +20,32 @@ import { EPOCH, countryOfDay } from '../src/lib/daily.ts';
  * restaurer, une propriété à tenir.
  *
  * ⚠️ Ne JAMAIS mettre ces valeurs à jour pour faire passer le test. Si elles
- * changent, c'est la modification qu'il faut revoir.
+ * changent, c'est la modification qu'il faut revoir. Elles n'ont été fixées
+ * qu'une fois, avant la mise en ligne, quand l'origine a été arrêtée.
  */
 const PINNED: [day: string, code: string][] = [
-    ['2026-08-20', 'ID'],
-    ['2026-08-21', 'SA'],
-    ['2026-08-22', 'RW'],
-    ['2026-08-26', 'VE'],
-    ['2026-09-02', 'BG'],
-    ['2026-09-18', 'CH'],
-    ['2026-10-18', 'PG'],
-    ['2026-11-17', 'PY'],
-    ['2026-12-17', 'LY'],
+    ['2026-01-01', 'ID'],
+    ['2026-01-02', 'SA'],
+    ['2026-02-14', 'ER'],
+    ['2026-03-15', 'ZW'],
     // De part et d'autre d'une frontière de cycle : c'est là que la permutation
     // change de graine.
-    ['2027-02-03', 'RS'],
-    ['2027-02-04', 'PE'],
-    ['2027-03-07', 'LU'],
-    ['2027-08-19', 'NZ'],
-    ['2028-02-17', 'VU'],
-    ['2028-08-18', 'SS'],
-    ['2029-08-18', 'PT'],
-    ['2030-08-18', 'KR'],
-    ['2032-02-09', 'FR'],
-    ['2033-06-23', 'PE'],
-    ['2036-08-16', 'KH'],
+    ['2026-06-17', 'RS'],
+    ['2026-06-18', 'PE'],
+    ['2026-08-19', 'ZM'],
+    ['2026-08-20', 'EE'],
+    ['2026-12-25', 'SL'],
+    ['2027-06-01', 'US'],
+    // Un 29 février : le calcul du jour ne doit pas trébucher dessus.
+    ['2028-02-29', 'BT'],
+    ['2029-01-01', 'EE'],
+    ['2030-07-04', 'IR'],
+    ['2032-02-09', 'NZ'],
+    ['2036-01-01', 'GW'],
 ];
 
-if (EPOCH !== '2026-08-20') {
+
+if (EPOCH !== '2026-01-01') {
     throw new Error(`EPOCH vaut ${EPOCH} : la déplacer change le pays de CHAQUE jour.`);
 }
 

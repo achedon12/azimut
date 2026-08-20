@@ -17,13 +17,18 @@ export function dayKey(now: Date = new Date()): string {
 }
 
 /**
- * Premier jour de jeu. Origine du numéro de partie, et borne basse des
- * archives : rien avant cette date n'est jouable.
+ * Premier jour de jeu. Borne basse des archives : rien avant cette date n'est
+ * jouable.
+ *
+ * Reculée au 1er janvier pour que le calendrier ne soit pas vide à l'ouverture.
+ * Calée sur le jour de la mise en ligne, il n'y avait littéralement aucun jour
+ * passé à jouer — une page d'archives avec une seule case active.
  *
  * ⚠️ La déplacer change le pays de CHAQUE jour, archives comprises. Elle est
- * figée une fois pour toutes à la mise en ligne.
+ * figée maintenant : après la mise en ligne, la bouger rendrait fausses les
+ * parties déjà jouées. `npm run check:schedule` refuse le changement.
  */
-export const EPOCH = '2026-08-20';
+export const EPOCH = '2026-01-01';
 
 export function puzzleNumber(key: string): number {
     const day = 86_400_000;
