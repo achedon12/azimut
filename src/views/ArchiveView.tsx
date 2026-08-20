@@ -172,10 +172,15 @@ export function ArchiveView({ locale }: { locale: Locale }) {
                         const number = Number(day.slice(8));
                         if (!playable) {
                             return (
+                                // ⚠️ Pas d'opacité sur le texte : `text-fg-muted/25`
+                                // tombait à 1,9:1 et faisait chuter
+                                // l'accessibilité. Ce qui distingue un jour
+                                // injouable, c'est l'ABSENCE de bordure — une
+                                // forme, pas une teinte plus pâle.
                                 <span
                                     key={day}
                                     aria-hidden="true"
-                                    className="numeric flex aspect-square items-center justify-center rounded-md text-[0.8rem] text-fg-muted/25"
+                                    className="numeric flex aspect-square items-center justify-center rounded-md border border-transparent text-[0.8rem] text-fg-muted"
                                 >
                                     {number}
                                 </span>
