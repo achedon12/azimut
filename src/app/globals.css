@@ -194,6 +194,19 @@
 
     .sweep {
         animation: sweep 9s linear infinite;
+        /* ⚠️ `fill-box`, et un cercle sans peinture dans le groupe pour lui
+           donner la boîte du cadran — voir `Radar.tsx`.
+
+           En `view-box`, la spec ne dit pas clairement d'où partent les
+           longueurs de `transform-origin` : Chrome les mesure depuis l'origine
+           du repère utilisateur, pas depuis le coin du viewBox. Avec un viewBox
+           `-10 -12 …`, le `50% 50%` qui était écrit ici tombait donc sur
+           (110, 112) au lieu de (100, 100), et le faisceau tournait autour d'un
+           point décalé de 15 unités : son sommet quittait le centre et sa
+           pointe franchissait l'anneau.
+
+           50 % de sa PROPRE boîte ne dépend d'aucune interprétation. */
+        transform-box: fill-box;
         transform-origin: 50% 50%;
     }
 

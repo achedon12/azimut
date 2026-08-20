@@ -108,6 +108,12 @@ export function Radar({
                 et le balayage semblait pivoter à côté du centre. Un faisceau de
                 radar passe par-dessus ce qu'il éclaire. */}
             <g className="sweep">
+                {/* Cercle SANS peinture : invisible, mais il donne au groupe une
+                    boîte englobante exactement égale au cadran. C'est elle que
+                    `transform-box: fill-box` prend pour référence, et c'est ce
+                    qui fixe le pivot au centre — voir la règle `.sweep` dans
+                    `globals.css`. Le retirer décentre la rotation. */}
+                <circle cx="100" cy="100" r={R} fill="none" />
                 <path d={`M100 100 L100 ${100 - R} A${R} ${R} 0 0 1 ${100 + R * 0.55} ${100 - R * 0.84} Z`} fill="url(#sweepFade)" />
                 <line x1="100" y1="100" x2="100" y2={100 - R} stroke="var(--accent)" strokeOpacity="0.5" strokeWidth="0.8" />
             </g>
