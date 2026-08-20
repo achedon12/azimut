@@ -1,0 +1,130 @@
+import type { Dictionary } from './fr';
+
+export const de: Dictionary = {
+    meta: {
+        title: 'Azimut',
+        titleTag: 'Azimut — das tägliche Geografiespiel',
+        description:
+            'Errate das Land des Tages an seinem Umriss. Jeder Versuch nennt dir Entfernung und Richtung. Sechs Versuche, eine Partie pro Tag, ohne Anmeldung.',
+        ogAlt: 'Azimut — errate das Land des Tages an seinem Umriss',
+        keywords: 'Geografiespiel, Land des Tages, tägliches Spiel, Länderumriss, kostenloses Spiel',
+        shortName: 'Azimut',
+    },
+    header: {
+        skipToContent: 'Zum Inhalt springen',
+        brand: 'Azimut',
+        navLabel: 'Navigation',
+        navRules: 'Regeln',
+        navAbout: 'Über',
+        languageLabel: 'Sprache',
+        themeLabel: 'Design',
+        themeToggle: 'Design: {mode}',
+        themeSystem: 'System',
+        themeLight: 'Hell',
+        themeDark: 'Dunkel',
+    },
+    game: {
+        puzzle: 'Partie Nr. {number}',
+        prompt: 'Welches Land ist das?',
+        hint: 'Jeder Versuch verrät Entfernung und Richtung des gesuchten Landes.',
+        inputLabel: 'Ländername',
+        placeholder: 'Land eingeben…',
+        submit: 'Raten',
+        attemptsLeft: 'Noch {count} Versuch',
+        attemptsLeftPlural: 'Noch {count} Versuche',
+        noMatch: 'Kein Land passt',
+        alreadyGuessed: 'Schon geraten',
+        won: 'In {count} geschafft!',
+        wonOne: 'Auf Anhieb geschafft!',
+        lost: 'Keine Versuche mehr — es war {country}',
+        answerWas: 'Die Antwort war {country}',
+        nextIn: 'Nächste Partie in {time}',
+        share: 'Ergebnis teilen',
+        copied: 'Kopiert',
+        distance: 'Entfernung',
+        direction: 'Peilung',
+        closeness: 'Nähe',
+        bullseye: 'Du bist da',
+    },
+    rules: {
+        title: 'Regeln',
+        heading: 'So wird gespielt',
+        lede: 'Ein Land pro Tag, für alle dasselbe, sechs Versuche.',
+        metaDescription:
+            'Die vollständigen Regeln von Azimut: Entfernung und Richtung nach jedem Versuch richtig lesen, wie die Nähe berechnet wird und warum alle dasselbe Rätsel spielen.',
+        steps: [
+            {
+                title: 'Der Umriss',
+                body: 'Die gezeigte Form gehört zu einem echten Land, maßstabsgetreu und richtig herum. Nichts wird verzerrt, um es schwerer zu machen.',
+            },
+            {
+                title: 'Jeder Versuch bringt dich näher',
+                body: 'Ein Versuch nennt dir drei Dinge: die Luftlinie zum gesuchten Land, die Richtung dorthin und eine Nähe in Prozent.',
+            },
+            {
+                title: 'Die Richtung ist ein echter Kurs',
+                body: 'Der Pfeil zeigt die Anfangspeilung — den Kurs, den ein Schiff beim Auslaufen steuern würde. Auf einem Globus ist das nicht dasselbe wie „rechts oben auf der Karte“.',
+            },
+            {
+                title: 'Eine Partie pro Tag',
+                body: 'Alle bekommen dasselbe Land, abgeleitet aus dem Datum in Pariser Zeit. Die nächste Partie kommt um Mitternacht.',
+            },
+        ],
+        back: 'Spielen',
+    },
+    about: {
+        title: 'Über',
+        heading: 'Über Azimut',
+        lede: 'Ein tägliches Geografiespiel, ohne Konto und ohne Werbung.',
+        metaDescription:
+            'Azimut, das kostenlose tägliche Geografiespiel ohne Konto und Werbung. Woher die Daten stammen, wie das Land des Tages gezogen wird und wer dahintersteckt.',
+        sections: [
+            {
+                title: 'Woher die Karten kommen',
+                body: 'Die Umrisse stammen von Natural Earth, einem gemeinfreien Kartendatensatz. Sie werden beim Bauen vereinfacht, damit sie klein lesbar bleiben — nie verzerrt.',
+            },
+            {
+                title: 'Was nicht erhoben wird',
+                body: 'Kein Konto, keine Werbung, keine Tracker von Dritten. Deine Partie des Tages bleibt in deinem Browser und wird nirgendwohin gesendet. Die Statistik ist ein selbst gehostetes Matomo, ohne Cookies.',
+            },
+            {
+                title: 'Wer es gemacht hat',
+                body: '{author}, Entwickler. Azimut ergänzt Push Your Luck und Werwölfe, versammelt auf einer gemeinsamen Übersicht.',
+            },
+        ],
+        contactTitle: 'Schreiben',
+        contactBody: 'Eine falsche Grenze, eine holprige Übersetzung, eine Idee:',
+        back: 'Spielen',
+    },
+    intro: {
+        heading: 'Ein Land pro Tag, sechs Versuche',
+        paragraphs: [
+            'Azimut ist ein tägliches Geografiespiel. Jeden Tag um Mitternacht wird ein neues Land aus den 175 Ländern der Welt gezogen, und nur seine Silhouette hilft beim Erkennen. Ohne Anmeldung, ohne App: Das ganze Spiel passt auf eine Seite.',
+            'Bei jedem Versuch zeigt die Skala, wie weit das gesuchte Land entfernt liegt und in welcher Richtung. Ein weit danebenliegender Versuch ist nie verloren — er grenzt eine Region ein, und der nächste kommt näher. Dieses Wechselspiel aus Entfernung und Peilung ersetzt die Karte.',
+            'Alle spielen dasselbe Rätsel, egal wo: Der Spieltag richtet sich nach der Pariser Zeit, sodass sich Ergebnisse vergleichen lassen, ohne dass jemand im Voraus spielt.',
+        ],
+        rulesLink: 'Die vollständigen Regeln lesen',
+    },
+    stats: {
+        title: 'Deine Statistik',
+        played: 'Spiele',
+        winRate: 'Trefferquote',
+        streak: 'Serie',
+        maxStreak: 'Rekord',
+        distribution: 'Verteilung der Versuche',
+        streakBadge: 'Serie {count}',
+        empty: 'Komm morgen wieder und starte eine Serie.',
+    },
+    footer: {
+        madeBy: 'Erstellt von {author}',
+        data: 'Geodaten: Natural Earth, gemeinfrei.',
+        otherGames: 'Meine anderen Spiele',
+        versionLabel: 'Version {version}',
+    },
+    compass: { n: 'Norden', ne: 'Nordosten', e: 'Osten', se: 'Südosten', s: 'Süden', sw: 'Südwesten', w: 'Westen', nw: 'Nordwesten' },
+    notFound: {
+        title: 'Seite nicht gefunden',
+        body: 'Diese Adresse gehört zu nichts auf dieser Seite.',
+        back: 'Zurück zum Spiel',
+    },
+};

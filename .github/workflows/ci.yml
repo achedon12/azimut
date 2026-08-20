@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 26
+          cache: npm
+
+      # `--ignore-scripts` évite de compiler sharp, qui ne sert qu'à
+      # `npm run og` — un script de poste de développement dont le résultat est
+      # versionné.
+      - run: npm ci --ignore-scripts
+
+      - run: npm run typecheck
+      - run: npm run lint
+
+      # L'URL importe : c'est elle qui écrit les canoniques et le sitemap. La
+      # construction réussirait sur un mauvais domaine sans rien signaler.
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://azimut.leoderoin.fr
+
+      # Garde-fous sur ce que le référencement ne pardonne pas.
+      - name: Vérifier les balises de référencement
+        run: |
+          set -e
+          for page in out/index.html out/en/index.html out/es/index.html out/de/index.html; do
+            grep -q '<link rel="canonical"' "$page" || { echo "canonical manquante dans $page"; exit 1; }
+            count=$(grep -o '<link rel="alternate"' "$page" | wc -l)
+            [ "$count" -eq 5 ] || { echo "$page déclare $count alternatives au lieu de 5"; exit 1; }
+          done
+          grep -q 'azimut.leoderoin.fr' out/sitemap.xml
+          echo "Référencement conforme."
+
+      # `prune-export` retire /404/ et /_not-found/, qui répondraient 200 et
+      # que Google signale comme des « soft 404 ». Une régression ici est
+      # invisible à l'œil.
+      - name: Vérifier l'élagage des pages d'erreur
+        run: |
+          set -e
+          test ! -d out/404 || { echo "out/404/ n'a pas été élagué"; exit 1; }
+          test ! -d out/_not-found || { echo "out/_not-found/ n'a pas été élagué"; exit 1; }
+          test -f out/404.html || { echo "out/404.html manquant"; exit 1; }
+          echo "Élagage conforme."
+
+      # Le jeu repose entièrement sur cette table : une silhouette décentrée ou
+      # un pays manquant ne se voit qu'en jouant.
+      - name: Vérifier la table des pays
+        run: npx tsx --eval "
+          const { COUNTRIES } = await import('./src/data/countries.ts');
+          if (COUNTRIES.length < 150) throw new Error('seulement ' + COUNTRIES.length + ' pays');
+          for (const c of COUNTRIES) {
+            const n = c.path.match(/-?\d+\.?\d*/g).map(Number);
+            const xs = n.filter((_, i) => i % 2 === 0), ys = n.filter((_, i) => i % 2 === 1);
+            const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+            if (Math.abs(cx - 50) > 0.5 || Math.abs(cy - 50) > 0.5) {
+              throw new Error(c.code + ' est décentré : (' + cx + ', ' + cy + ')');
+            }
+          }
+          console.log(COUNTRIES.length + ' pays, tous centrés.');
+          "
