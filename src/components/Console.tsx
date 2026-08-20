@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import { CalendarDays } from 'lucide-react';
 import { getDictionary } from '@/i18n';
 import type { Locale } from '@/i18n/config';
 import { path, type RouteKey } from '@/i18n/routes';
@@ -30,7 +31,6 @@ export function Console({
 
     const nav = [
         { key: 'rules' as const, label: d.header.navRules },
-        { key: 'archives' as const, label: d.header.navArchives },
         { key: 'about' as const, label: d.header.navAbout },
     ];
 
@@ -55,6 +55,19 @@ export function Console({
                         <span className="numeric text-[0.7rem] tracking-[0.12em] text-fg-muted uppercase">
                             {readout}
                         </span>
+                        {/* Le calendrier, juste après la date : c'est là qu'on
+                            le cherche quand on veut un AUTRE jour. Le libellé
+                            reste dans le balisage — une ancre sans texte est
+                            plus faible pour l'indexation, et n'a pas de nom
+                            accessible. */}
+                        <Link
+                            href={path('archives', locale)}
+                            aria-current={routeKey === 'archives' ? 'page' : undefined}
+                            className="-m-1.5 rounded p-1.5 text-fg-muted transition-colors hover:text-fg aria-[current=page]:text-accent"
+                        >
+                            <CalendarDays aria-hidden="true" className="size-4" strokeWidth={1.75} />
+                            <span className="sr-only">{d.header.navArchives}</span>
+                        </Link>
                     </span>
                 </div>
             </div>

@@ -10,10 +10,11 @@
         "typecheck": "tsc --noEmit",
         "countries": "tsx scripts/build-countries.mts",
         "nginx": "tsx scripts/gen-nginx-redirects.mts",
-        "check": "npm run typecheck && npm run lint && npm run build && npm run check:countries",
+        "check": "npm run typecheck && npm run lint && npm run build && npm run check:countries && npm run check:schedule",
         "og": "tsx scripts/export-og.mts",
         "fonts": "cp node_modules/@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2 node_modules/@fontsource-variable/roboto-mono/files/roboto-mono-latin-wght-normal.woff2 src/fonts/",
-        "check:countries": "tsx scripts/check-countries.mts"
+        "check:countries": "tsx scripts/check-countries.mts",
+        "check:schedule": "tsx scripts/check-schedule.mts"
     },
     "dependencies": {
         "lucide-react": "^1.33.0",

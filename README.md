@@ -7,7 +7,7 @@ proposition la **distance** et le **cap** qui vous séparent de la réponse.
 
 Le même pays pour tout le monde, chaque jour, sans compte et sans publicité. Un
 jour manqué n'est pas perdu : toutes les parties passées restent jouables depuis
-la page **Archives**.
+la page **Archives**, un calendrier où l'on choisit sa date.
 
 ---
 
@@ -29,7 +29,7 @@ Les essais vivent dans le `localStorage` et n'en sortent jamais.
 | Cadre | Next.js 16, App Router, `output: 'export'` |
 | Styles | Tailwind CSS v4, thème clair/sombre/système |
 | Langues | français, anglais, espagnol, allemand — slugs traduits |
-| Données | Natural Earth 110m (domaine public), simplifié à la construction |
+| Données | Natural Earth 110m (domaine public), 168 pays souverains |
 | Production | une image nginx de 26 Mo, sans privilèges, en lecture seule |
 
 ## Démarrer
@@ -79,6 +79,14 @@ Le script projette chaque pays dans un carré de 100 unités, écarte les
 territoires trop éloignés de la masse principale — la Guyane pour la France,
 par exemple — et adapte la simplification à la taille du pays. Chaque silhouette
 sort centrée sur (50, 50), ce que la CI vérifie.
+
+La question posée étant « quel est ce pays ? », la table ne garde que ce qui **se
+gouverne soi-même** : l'Antarctique, le Groenland, Porto Rico et les autres
+dépendances sont écartés, avec leur raison, en tête de `build-countries.mts`.
+
+⚠️ Le contenu ET L'ORDRE de cette table déterminent le pays de chaque jour.
+Ajouter un pays au milieu décale toute la suite et réécrit silencieusement les
+archives déjà jouées. `npm run check:schedule` refuse ce genre de changement.
 
 ## Structure
 

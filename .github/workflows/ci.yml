@@ -55,3 +55,8 @@ jobs:
 
       - name: Vérifier la table des pays
         run: npx tsx scripts/check-countries.mts
+
+      # Le calendrier n'est stocké nulle part : c'est un calcul. Ce test est ce
+      # qui garantit qu'il donnera les mêmes pays dans dix ans qu'aujourd'hui.
+      - name: Vérifier la stabilité du calendrier
+        run: npx tsx scripts/check-schedule.mts

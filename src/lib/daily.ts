@@ -71,17 +71,25 @@ export function formatDay(
 }
 
 /**
- * Mélange déterministe des pays.
+ * Mélange déterministe des pays, pour un cycle donné.
  *
  * Une permutation complète plutôt qu'un tirage : aucun pays ne revient avant
  * que tous soient passés, là où un `hash % 175` rejouerait le même pays deux
  * fois dans la semaine.
  *
- * Le mélange ne dépend pas du jour : la suite est calculée une fois, et chaque
- * jour y lit sa position.
+ * ⚠️ La graine dépend du NUMÉRO DE CYCLE, et c'est ce qui évite que la suite
+ * recommence à l'identique tous les 175 jours. Avec une graine fixe, le jour
+ * 176 redonnait le pays du jour 1 et tout l'ordre se répétait — invisible tant
+ * qu'on ne jouait que le jour même, flagrant depuis que les archives
+ * s'ouvrent.
+ *
+ * Rien de tout ceci n'est stocké : à date égale, le calcul redonne le même
+ * pays sur toutes les machines et pour toujours. C'est `scripts/check-schedule`
+ * qui le VÉRIFIE, contre des couples date → pays figés.
  */
-function shuffled(): Country[] {
-    let seed = 0x9e3779b9;
+function shuffled(cycle: number): Country[] {
+    // `|| 1` : un xorshift dont la graine vaut zéro reste bloqué sur zéro.
+    let seed = ((0x9e3779b9 ^ Math.imul(cycle, 0x85ebca6b)) >>> 0) || 1;
     const random = () => {
         seed ^= seed << 13;
         seed ^= seed >>> 17;
@@ -97,10 +105,23 @@ function shuffled(): Country[] {
     return list;
 }
 
-const ORDER = shuffled();
+// Un cycle entier est calculé d'un coup, puis gardé : la page d'archives
+// demande des centaines de jours, presque tous dans le même cycle.
+const cycles = new Map<number, Country[]>();
+
+function order(cycle: number): Country[] {
+    let list = cycles.get(cycle);
+    if (!list) {
+        list = shuffled(cycle);
+        cycles.set(cycle, list);
+    }
+    return list;
+}
 
 export function countryOfDay(key: string = dayKey()): Country {
-    return ORDER[(puzzleNumber(key) - 1) % ORDER.length]!;
+    const index = puzzleNumber(key) - 1;
+    const size = COUNTRIES.length;
+    return order(Math.floor(index / size))[index % size]!;
 }
 
 export const MAX_GUESSES = 6;

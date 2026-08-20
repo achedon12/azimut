@@ -171,13 +171,37 @@ const geojson = JSON.parse(await readFile(SOURCE, 'utf8')) as {
     features: { properties: Record<string, string>; geometry: { type: string; coordinates: unknown } }[];
 };
 
+/**
+ * Entités à écarter, avec leur raison.
+ *
+ * La question posée au joueur est « quel est ce pays ? ». Une règle explicite
+ * vaut mieux qu'un arbitrage au cas par cas, qui deviendrait vite politique :
+ * on garde ce qui SE GOUVERNE SOI-MÊME, on écarte les dépendances et les
+ * territoires sans gouvernement propre. Taïwan et le Kosovo restent donc, les
+ * collectivités et possessions non.
+ */
+const EXCLUDED: Record<string, string> = {
+    AQ: 'Continent sans gouvernement, et silhouette reconnaissable entre mille.',
+    TF: 'Îles subantarctiques éparses : injouable, et non autonome.',
+    EH: 'Territoire non autonome au sens de l’ONU.',
+    FK: 'Territoire britannique d’outre-mer.',
+    GL: 'Territoire autonome du Danemark, pas un État.',
+    NC: 'Collectivité française.',
+    PR: 'Territoire des États-Unis.',
+};
+
 const countries = geojson.features
     .filter((f) => {
         const code = f.properties.ISO_A2_EH;
         // `-99` marque les entités sans code ISO : territoires contestés et
         // dépendances. Les exclure évite d'avoir à trancher des questions de
         // souveraineté dans un jeu.
-        return code && code !== '-99' && f.properties.NAME_FR && f.properties.NAME_EN;
+        if (!code || code === '-99' || !f.properties.NAME_FR || !f.properties.NAME_EN) return false;
+        if (code in EXCLUDED) {
+            console.log(`build-countries: ${code} écarté — ${EXCLUDED[code]}`);
+            return false;
+        }
+        return true;
     })
     .map((f) => {
         const all = rings(f.geometry);
