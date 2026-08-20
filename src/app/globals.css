@@ -1,0 +1,227 @@
+@import 'tailwindcss';
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Palette — instrument de navigation
+
+   Volontairement ÉLOIGNÉE du panneau `jeux.leoderoin.fr` : celui-ci est un
+   papier crème, chaleureux et arrondi. Azimut est un appareil de mesure —
+   fond froid, filets d'un pixel, angles courts, chiffres à chasse fixe.
+   Deux sites de la même main ne doivent pas se confondre.
+
+   Le bleu de relèvement est la seule couleur d'interface. Les autres teintes
+   saturées appartiennent à l'échelle de PROXIMITÉ : elles portent une
+   information, elles ne décorent pas.
+
+   Chaque couleur a sa valeur de base sur `:root`. Une couleur définie
+   UNIQUEMENT dans un bloc @media ou [data-theme] disparaît dans les deux
+   autres états — et « système » est justement celui qu'on oublie de tester.
+   ────────────────────────────────────────────────────────────────────────── */
+:root {
+    --bg: #e7ecf1;
+    --bg-elevated: #f5f8fb;
+    --bg-sunken: #d9e1e9;
+    --fg: #0e1a28;
+    --fg-muted: #4d5f74;
+    --border: #c2cedb;
+    --border-strong: #9dafc1;
+    --accent: #0d3b66;
+    --accent-contrast: #f5f8fb;
+    --ring: #0d3b66;
+    --rings: rgb(14 26 40 / 0.05);
+
+    /* Échelle de proximité, du plus froid au plus chaud. Cinq paliers : en
+       dessous les sauts se voient, au-dessus deux essais voisins deviennent
+       indiscernables. */
+    --step-1: #2a6f97;
+    --step-2: #1f8a8a;
+    --step-3: #9a7b12;
+    --step-4: #bf5a1b;
+    --step-5: #b02e22;
+    --win: #0f6b45;
+    --win-soft: #d7ecdf;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+        --bg: #060b12;
+        --bg-elevated: #0d1621;
+        --bg-sunken: #091018;
+        --fg: #dde8f2;
+        --fg-muted: #7d92a8;
+        --border: #16232f;
+        --border-strong: #2b3d4f;
+        /* Cyan de cadran : la couleur d'un afficheur, pas d'un site web. */
+        --accent: #4cc9f0;
+        --accent-contrast: #041019;
+        --ring: #4cc9f0;
+        --rings: rgb(76 201 240 / 0.07);
+
+        --step-1: #4ca8dc;
+        --step-2: #3fc9c0;
+        --step-3: #e0b64a;
+        --step-4: #f08b4a;
+        --step-5: #f2604a;
+        --win: #4fd18a;
+        --win-soft: #08281c;
+    }
+}
+
+/* Sombre FORCÉ. Duplication volontaire : une règle @media ne s'applique pas
+   quand la machine est en clair, il faut une seconde source pour que le bouton
+   l'emporte dans les deux sens. */
+:root[data-theme='dark'] {
+    --bg: #060b12;
+    --bg-elevated: #0d1621;
+    --bg-sunken: #091018;
+    --fg: #dde8f2;
+    --fg-muted: #7d92a8;
+    --border: #16232f;
+    --border-strong: #2b3d4f;
+    --accent: #4cc9f0;
+    --accent-contrast: #041019;
+    --ring: #4cc9f0;
+    --rings: rgb(76 201 240 / 0.07);
+
+    --step-1: #4ca8dc;
+    --step-2: #3fc9c0;
+    --step-3: #e0b64a;
+    --step-4: #f08b4a;
+    --step-5: #f2604a;
+    --win: #4fd18a;
+    --win-soft: #08281c;
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --fg-muted: #2c3b4d;
+        --border: #a5b4c4;
+        --border-strong: #7d90a4;
+    }
+}
+
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+        --fg-muted: #b6c8da;
+        --border: #2a3a49;
+        --border-strong: #4a6076;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root[data-theme='dark'] {
+        --fg-muted: #b6c8da;
+        --border: #2a3a49;
+        --border-strong: #4a6076;
+    }
+}
+
+@theme inline {
+    --breakpoint-xs: 26rem;
+
+    --color-bg: var(--bg);
+    --color-bg-elevated: var(--bg-elevated);
+    --color-bg-sunken: var(--bg-sunken);
+    --color-fg: var(--fg);
+    --color-fg-muted: var(--fg-muted);
+    --color-border-subtle: var(--border);
+    --color-border-strong: var(--border-strong);
+    --color-accent: var(--accent);
+    --color-accent-contrast: var(--accent-contrast);
+
+    /* Posées par next/font sur <html>. Le suffixe `-local` est obligatoire :
+       `--font-sans` est déjà un jeton Tailwind. */
+    --font-sans: var(--font-sans-local);
+    --font-mono: var(--font-mono-local);
+}
+
+@layer base {
+    html {
+        color-scheme: light;
+        -webkit-text-size-adjust: 100%;
+        --header-h: 3rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        html:not([data-theme='light']) {
+            color-scheme: dark;
+        }
+    }
+
+    html[data-theme='dark'] {
+        color-scheme: dark;
+    }
+
+    body {
+        /* Le fond doit être explicite : laissé transparent, la page emprunte
+           celui du navigateur et clignote au chargement d'un thème sombre.
+
+           Des cercles concentriques plutôt qu'un quadrillage : c'est l'écran
+           d'un appareil de relèvement, et ça ne ressemble à rien d'autre sur
+           les autres sites. En `background-image` — aucun nœud de plus. */
+        background-color: var(--bg);
+        /* Aucune texture de fond : le cadran porte déjà toutes les lignes de
+           la page. En ajouter ferait deux grilles concurrentes. */
+        color: var(--fg);
+        font-family: var(--font-sans);
+        min-height: 100dvh;
+        text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+
+    /* Tous les nombres du jeu sont à chasse fixe : distances et pourcentages
+       s'alignent alors en colonne d'un essai au suivant, et l'écran se lit
+       comme un cadran plutôt que comme une page. */
+    .numeric {
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+    }
+
+    /* Le balayage du cadran : une seule idée d'animation sur tout le site.
+       Lent et discret — c'est ce qui donne à l'écran l'air d'être ALLUMÉ, sans
+       demander l'attention. `prefers-reduced-motion` l'arrête. */
+    @keyframes sweep {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .sweep {
+        animation: sweep 9s linear infinite;
+        transform-origin: 50% 50%;
+    }
+
+    /* Micro-intitulés d'instrument : petits, espacés, en capitales. */
+    .label {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    [id] {
+        scroll-margin-block-start: calc(var(--header-h) + 1.25rem);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+        border-radius: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}

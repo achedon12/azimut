@@ -1,0 +1,130 @@
+import type { Dictionary } from './fr';
+
+export const en: Dictionary = {
+    meta: {
+        title: 'Azimut',
+        titleTag: 'Azimut — the daily geography game',
+        description:
+            'Guess today’s country from its outline. Every guess gives you the distance and the bearing. Six tries, one game a day, no sign-up.',
+        ogAlt: 'Azimut — guess today’s country from its outline',
+        keywords: 'geography game, country of the day, daily game, country outline, free game',
+        shortName: 'Azimut',
+    },
+    header: {
+        skipToContent: 'Skip to content',
+        brand: 'Azimut',
+        navLabel: 'Navigation',
+        navRules: 'Rules',
+        navAbout: 'About',
+        languageLabel: 'Language',
+        themeLabel: 'Theme',
+        themeToggle: 'Theme: {mode}',
+        themeSystem: 'System',
+        themeLight: 'Light',
+        themeDark: 'Dark',
+    },
+    game: {
+        puzzle: 'Game #{number}',
+        prompt: 'Which country is this?',
+        hint: 'Every guess tells you how far the country is, and in which direction.',
+        inputLabel: 'Country name',
+        placeholder: 'Type a country…',
+        submit: 'Guess',
+        attemptsLeft: '{count} try left',
+        attemptsLeftPlural: '{count} tries left',
+        noMatch: 'No country matches',
+        alreadyGuessed: 'Already guessed',
+        won: 'Got it in {count}!',
+        wonOne: 'Got it first try!',
+        lost: 'Out of tries — it was {country}',
+        answerWas: 'The answer was {country}',
+        nextIn: 'Next game in {time}',
+        share: 'Share my result',
+        copied: 'Copied',
+        distance: 'Distance',
+        direction: 'Bearing',
+        closeness: 'Closeness',
+        bullseye: 'You’re there',
+    },
+    rules: {
+        title: 'Rules',
+        heading: 'How to play',
+        lede: 'One country a day, the same for everyone, six tries.',
+        metaDescription:
+            'The full rules of Azimut: how to read the distance and bearing shown after each guess, how closeness is worked out, and why everyone plays the same puzzle each day.',
+        steps: [
+            {
+                title: 'The outline',
+                body: 'The shape shown is a real country, to scale and the right way up. Nothing is distorted to make it harder.',
+            },
+            {
+                title: 'Every guess brings you closer',
+                body: 'A guess gives you three things: the straight-line distance to the target country, the bearing to reach it, and a closeness percentage.',
+            },
+            {
+                title: 'The bearing is a real course',
+                body: 'The arrow shows the initial bearing — the course a ship would steer at the start. On a globe, that is not the same as “up and to the right on the map”.',
+            },
+            {
+                title: 'One game a day',
+                body: 'Everyone gets the same country, derived from the date in Paris time. The next game arrives at midnight.',
+            },
+        ],
+        back: 'Play',
+    },
+    about: {
+        title: 'About',
+        heading: 'About Azimut',
+        lede: 'A daily geography game, no account and no ads.',
+        metaDescription:
+            'Azimut is a free daily geography game with no account and no ads. Where the data comes from, how the country of the day is drawn, and who is behind the site.',
+        sections: [
+            {
+                title: 'Where the maps come from',
+                body: 'The outlines come from Natural Earth, a public-domain cartographic dataset. They are simplified at build time to stay readable at small sizes — never distorted.',
+            },
+            {
+                title: 'What is not collected',
+                body: 'No account, no ads, no third-party trackers. Today’s game is kept in your browser and never sent anywhere. Analytics is a self-hosted Matomo, without cookies.',
+            },
+            {
+                title: 'Who made it',
+                body: '{author}, a developer. Azimut joins Push Your Luck and Werewolf, gathered on a shared panel.',
+            },
+        ],
+        contactTitle: 'Get in touch',
+        contactBody: 'A wrong border, an awkward translation, an idea:',
+        back: 'Play',
+    },
+    intro: {
+        heading: 'One country a day, six guesses',
+        paragraphs: [
+            'Azimut is a daily geography game. Every day at midnight a new country is drawn from the 175 in the world, and its outline is all you get to recognise it. No sign-up, no app to install: the whole game fits in one page.',
+            'With every guess, the dial shows how far you are from the target country and which way it lies. A wild guess is never wasted — it rules out a region, and the next one closes in. That back and forth between distance and bearing is what replaces the map.',
+            'Everyone plays the same puzzle wherever they are: the game day follows Paris time, so you can compare your result with friends without anyone playing ahead.',
+        ],
+        rulesLink: 'Read the full rules',
+    },
+    stats: {
+        title: 'Your statistics',
+        played: 'Played',
+        winRate: 'Win rate',
+        streak: 'Streak',
+        maxStreak: 'Best',
+        distribution: 'Guess distribution',
+        streakBadge: 'Streak {count}',
+        empty: 'Come back tomorrow to start a streak.',
+    },
+    footer: {
+        madeBy: 'Built by {author}',
+        data: 'Geographic data: Natural Earth, public domain.',
+        otherGames: 'My other games',
+        versionLabel: 'Version {version}',
+    },
+    compass: { n: 'north', ne: 'north-east', e: 'east', se: 'south-east', s: 'south', sw: 'south-west', w: 'west', nw: 'north-west' },
+    notFound: {
+        title: 'Page not found',
+        body: 'This address does not match anything on this site.',
+        back: 'Back to the game',
+    },
+};

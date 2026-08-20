@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+
+.env
+.env.local
+
+# Réglages d'éditeur : ils décrivent une machine, pas le projet.
+/.idea
+/.vscode
+
+.DS_Store

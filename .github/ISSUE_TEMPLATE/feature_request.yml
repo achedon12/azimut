@@ -1,0 +1,42 @@
+name: Idée
+description: Proposer une amélioration
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Azimut est **une partie par jour, la même pour tout le monde, sans
+        compte**. Les idées qui respectent ces trois contraintes ont toutes
+        leurs chances ; celles qui demandent un serveur, un classement ou une
+        inscription, beaucoup moins.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Le problème
+      description: Qu'est-ce qui ne va pas aujourd'hui ? Le « pourquoi » avant le « quoi ».
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Ce que tu proposes
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Nature
+      options:
+        - Règle ou mécanique de jeu
+        - Design ou ergonomie
+        - Traduction ou nouvelle langue
+        - Référencement ou performance
+        - Accessibilité
+        - Autre
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Ce que tu as envisagé d'autre
+      description: Facultatif, mais ça évite de refaire le tour.
