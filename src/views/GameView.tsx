@@ -2,6 +2,8 @@
 
 import { useMemo, useState, useSyncExternalStore } from 'react';
 import { Check, Share2 } from 'lucide-react';
+import Link from 'next/link';
+import { CalendarClock, RotateCcw } from 'lucide-react';
 import { Countdown } from '@/components/Countdown';
 import { GuessInput } from '@/components/GuessInput';
 import { GuessSlot } from '@/components/GuessSlot';
@@ -11,9 +13,10 @@ import { COUNTRIES } from '@/data/countries';
 import { getDictionary } from '@/i18n';
 import type { Locale } from '@/i18n/config';
 import { format } from '@/i18n/format';
-import { MAX_GUESSES, countryOfDay, puzzleNumber } from '@/lib/daily';
+import { path } from '@/i18n/routes';
+import { MAX_GUESSES, countryOfDay, dayKey, formatDay } from '@/lib/daily';
 import { bearing, closeness, distanceKm, sector } from '@/lib/geo';
-import { addGuess, getServerSnapshot, getSnapshot, subscribe } from '@/lib/gameStore';
+import { addGuess, getServerSnapshot, getSnapshot, selectDay, subscribe } from '@/lib/gameStore';
 import { getStatsServerSnapshot, getStatsSnapshot, subscribeStats } from '@/lib/statsStore';
 import { shareText } from '@/lib/share';
 import { SITE_URL } from '@/lib/site';
@@ -22,7 +25,7 @@ export function GameView({ locale }: { locale: Locale }) {
     const d = getDictionary(locale);
 
     // L'état vit hors de React — voir `lib/gameStore`.
-    const { day, guesses } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+    const { day, guesses, isToday } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     const stats = useSyncExternalStore(subscribeStats, getStatsSnapshot, getStatsServerSnapshot);
     const [copied, setCopied] = useState(false);
 
@@ -64,7 +67,7 @@ export function GameView({ locale }: { locale: Locale }) {
             await navigator.clipboard.writeText(
                 shareText({
                     title: d.meta.title,
-                    puzzle: `#${puzzleNumber(day)}`,
+                    puzzle: formatDay(day, locale),
                     lines: rows.map((r) => ({ km: r.km, direction: r.direction, correct: r.correct })),
                     maxGuesses: MAX_GUESSES,
                     url: SITE_URL,
@@ -82,6 +85,26 @@ export function GameView({ locale }: { locale: Locale }) {
 
     return (
         <div className="mx-auto flex w-full max-w-md flex-col gap-3.5 px-5 py-4">
+            {/* Bandeau d'archive. Au-dessus du cadran et non en bas : sans lui,
+                rien ne distingue une partie d'un autre jour de celle du jour,
+                et un joueur croirait avoir déjà trouvé la réponse du jour. */}
+            {day && !isToday && (
+                <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 rounded-md border border-accent/40 bg-bg-elevated px-3 py-2">
+                    <span className="flex items-center gap-2 text-[0.8rem]">
+                        <CalendarClock aria-hidden="true" className="size-4 text-accent" />
+                        {format(d.game.archiveNotice, { date: formatDay(day, locale) })}
+                    </span>
+                    <button
+                        type="button"
+                        onClick={() => selectDay(dayKey())}
+                        className="label inline-flex items-center gap-1.5 text-accent"
+                    >
+                        <RotateCcw aria-hidden="true" className="size-3.5" />
+                        {d.game.backToToday}
+                    </button>
+                </div>
+            )}
+
             {/* Le cadran EST la page, pas une illustration posée dessus. */}
             <div className="relative mx-auto aspect-square w-full max-w-[19rem]">
                 {target && (
@@ -149,11 +172,15 @@ export function GameView({ locale }: { locale: Locale }) {
                             )}
                         </div>
 
-                        <StatsPanel
-                            stats={stats}
-                            dictionary={d}
-                            highlight={won ? guesses.length : null}
-                        />
+                        {isToday ? (
+                            <StatsPanel
+                                stats={stats}
+                                dictionary={d}
+                                highlight={won ? guesses.length : null}
+                            />
+                        ) : (
+                            <p className="text-[0.8rem] text-fg-muted">{d.game.archiveExcluded}</p>
+                        )}
 
                         <div className="flex flex-col items-center gap-2">
                             <button
@@ -164,8 +191,25 @@ export function GameView({ locale }: { locale: Locale }) {
                                 {copied ? <Check aria-hidden="true" className="size-4" /> : <Share2 aria-hidden="true" className="size-4" />}
                                 {copied ? d.game.copied : d.game.share}
                             </button>
-                            <Countdown template={d.game.nextIn} />
+                            {isToday ? (
+                                <Countdown template={d.game.nextIn} />
+                            ) : (
+                                <Link
+                                    href={path('archives', locale)}
+                                    className="text-[0.8rem] text-fg-muted underline-offset-4 hover:underline"
+                                >
+                                    {d.game.seeArchives}
+                                </Link>
+                            )}
                         </div>
+                        {isToday && (
+                            <Link
+                                href={path('archives', locale)}
+                                className="text-[0.8rem] text-fg-muted underline-offset-4 hover:underline"
+                            >
+                                {d.game.seeArchives}
+                            </Link>
+                        )}
                         <span aria-live="polite" className="sr-only">{copied ? d.game.copied : ''}</span>
                     </div>
                 )

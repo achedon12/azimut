@@ -6,6 +6,7 @@ import { isLocale } from '@/i18n/config';
 import { contentKeyForSlug, contentParams } from '@/i18n/routes';
 import { buildBreadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 import { AboutView } from '@/views/AboutView';
+import { ArchiveView } from '@/views/ArchiveView';
 import { RulesView } from '@/views/RulesView';
 
 // Segment dynamique plutôt qu'un dossier par langue : les slugs sont TRADUITS
@@ -41,8 +42,14 @@ export default async function Page({
     const d = getDictionary(locale);
 
     return (
-        <Console locale={locale} routeKey={key} readout={key === 'about' ? d.about.title : d.rules.title}>
-            {key === 'about' ? <AboutView locale={locale} /> : <RulesView locale={locale} />}
+        <Console locale={locale} routeKey={key} readout={d[key].title}>
+            {key === 'about' ? (
+                <AboutView locale={locale} />
+            ) : key === 'archives' ? (
+                <ArchiveView locale={locale} />
+            ) : (
+                <RulesView locale={locale} />
+            )}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: buildBreadcrumbJsonLd(locale, key) }}

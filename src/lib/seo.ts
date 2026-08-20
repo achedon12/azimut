@@ -16,12 +16,15 @@ function alternates(key: RouteKey): Record<string, string> {
 
 export function buildMetadata(locale: Locale, key: RouteKey = 'home'): Metadata {
     const d = getDictionary(locale);
+    // Une table plutôt que des ternaires imbriqués : à quatre routes, la
+    // cascade devenait illisible et cachait une accolade mal placée.
     const copy =
         key === 'home'
             ? d.meta
-            : key === 'about'
-              ? { titleTag: `${d.about.title} — ${d.meta.title}`, description: d.about.metaDescription }
-              : { titleTag: `${d.rules.title} — ${d.meta.title}`, description: d.rules.metaDescription };
+            : {
+                  titleTag: `${d[key].title} — ${d.meta.title}`,
+                  description: d[key].metaDescription,
+              };
 
     return {
         metadataBase: new URL(SITE_URL),
@@ -126,7 +129,7 @@ function game(locale: Locale, d: Dict, home: string) {
  */
 export function buildBreadcrumbJsonLd(locale: Locale, key: Exclude<RouteKey, 'home'>): string {
     const d = getDictionary(locale);
-    const name = key === 'about' ? d.about.title : d.rules.title;
+    const name = key === 'about' ? d.about.title : key === 'archives' ? d.archives.title : d.rules.title;
     return JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',

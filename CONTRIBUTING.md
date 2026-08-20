@@ -9,7 +9,10 @@ Elles ne sont pas négociables, et la plupart des idées refusées le sont parce
 qu'elles en cassent une :
 
 1. **Une partie par jour, la même pour tout le monde.** Le jour est calé sur
-   l'heure de Paris. Pas de mode entraînement à volonté, qui viderait le rituel.
+   l'heure de Paris. Les jours passés se rejouent depuis `/archives/`, mais ils
+   ne comptent PAS dans la série : une série qu'on rattrape en enchaînant les
+   archives ne mesure plus l'assiduité. Pas de mode entraînement infini, qui
+   viderait le rituel.
 2. **Aucun serveur.** Pas de base, pas d'API, pas de compte, pas de classement.
    Tout se calcule dans le navigateur à partir de la date.
 3. **Quatre langues, toujours.** Un texte ajouté dans un seul dictionnaire fait

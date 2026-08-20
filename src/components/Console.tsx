@@ -30,6 +30,7 @@ export function Console({
 
     const nav = [
         { key: 'rules' as const, label: d.header.navRules },
+        { key: 'archives' as const, label: d.header.navArchives },
         { key: 'about' as const, label: d.header.navAbout },
     ];
 

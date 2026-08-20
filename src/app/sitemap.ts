@@ -16,6 +16,9 @@ export const dynamic = 'force-static';
 const PAGES: { key: RouteKey; priority: number; changeFrequency: 'daily' | 'monthly' }[] = [
     { key: 'home', priority: 1, changeFrequency: 'daily' },
     { key: 'rules', priority: 0.6, changeFrequency: 'monthly' },
+    // Une entrée de plus chaque jour : les archives changent aussi souvent
+    // que l'accueil.
+    { key: 'archives', priority: 0.5, changeFrequency: 'daily' },
     { key: 'about', priority: 0.4, changeFrequency: 'monthly' },
 ];
 

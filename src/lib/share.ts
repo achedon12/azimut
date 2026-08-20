@@ -32,6 +32,7 @@ export function shareText({
     streak = 0,
 }: {
     title: string;
+    /** Identifie la partie : la DATE, puisque les jours passés se rejouent. */
     puzzle: string;
     lines: ShareLine[];
     maxGuesses: number;

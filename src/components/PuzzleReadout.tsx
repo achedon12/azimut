@@ -1,16 +1,20 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
-import { getDictionary } from '@/i18n';
 import type { Locale } from '@/i18n/config';
-import { format } from '@/i18n/format';
-import { puzzleNumber } from '@/lib/daily';
+import { formatDay } from '@/lib/daily';
 import { getServerSnapshot, getSnapshot, subscribe } from '@/lib/gameStore';
 
-/** Le numéro de la partie du jour, gravé sur la plaque. Vide côté serveur :
- *  le jour dépend du fuseau et n'existe qu'après hydratation. */
+/**
+ * La date de la partie affichée, gravée sur la plaque.
+ *
+ * La date et non un numéro de partie : depuis que les jours passés se rejouent,
+ * « partie n° 12 » n'apprend rien à qui cherche à savoir QUEL jour il regarde.
+ *
+ * Vide côté serveur : le jour dépend du fuseau et n'existe qu'après hydratation.
+ */
 export function PuzzleReadout({ locale }: { locale: Locale }) {
     const { day } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     if (!day) return null;
-    return <>{format(getDictionary(locale).game.puzzle, { number: puzzleNumber(day) })}</>;
+    return <>{formatDay(day, locale, { day: 'numeric', month: 'short', year: 'numeric' })}</>;
 }

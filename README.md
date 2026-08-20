@@ -5,7 +5,9 @@ proposition la **distance** et le **cap** qui vous séparent de la réponse.
 
 **→ [azimut.leoderoin.fr](https://azimut.leoderoin.fr)**
 
-Le même pays pour tout le monde, chaque jour, sans compte et sans publicité.
+Le même pays pour tout le monde, chaque jour, sans compte et sans publicité. Un
+jour manqué n'est pas perdu : toutes les parties passées restent jouables depuis
+la page **Archives**.
 
 ---
 
@@ -15,6 +17,10 @@ Un site **entièrement statique**. Pas de base de données, pas d'API, pas de
 session. Le pays du jour est déduit de la date par une permutation
 déterministe, calculée dans le navigateur : deux joueurs à l'autre bout du
 monde tombent sur le même pays sans qu'aucun serveur n'ait à le leur dire.
+
+C'est aussi ce qui rend les archives gratuites : `countryOfDay('2026-09-14')`
+donne la même réponse sur toutes les machines et pour toujours. Il n'y a rien à
+stocker, donc rien à sauvegarder et rien qui puisse tomber en panne.
 
 Les essais vivent dans le `localStorage` et n'en sortent jamais.
 

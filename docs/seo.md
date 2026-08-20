@@ -22,7 +22,11 @@ npx lighthouse@12 http://127.0.0.1:3007/ --preset=desktop --view
 
 ## Ce qui est en place
 
-**13 pages** : 4 langues × (jeu, règles, à propos), plus `404.html`.
+**17 pages** : 4 langues × (jeu, règles, archives, à propos), plus `404.html`.
+
+Les parties passées vivent sur l'accueil, en paramètre `?d=AAAA-MM-JJ`. Pas de
+route par jour : elles se compteraient par milliers au fil des ans, pour des
+pages au contenu quasi identique. La canonique de l'accueil les rassemble.
 
 - `<title>` de 13 à 38 caractères, description de 130 à 167 ;
 - canonique sur chaque page, en forme **avec barre finale** — `trailingSlash:

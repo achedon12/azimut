@@ -16,12 +16,58 @@ export function dayKey(now: Date = new Date()): string {
     }).format(now);
 }
 
-/** Premier jour de jeu. Sert d'origine au numéro de partie. */
-export const EPOCH = '2026-08-21';
+/**
+ * Premier jour de jeu. Origine du numéro de partie, et borne basse des
+ * archives : rien avant cette date n'est jouable.
+ *
+ * ⚠️ La déplacer change le pays de CHAQUE jour, archives comprises. Elle est
+ * figée une fois pour toutes à la mise en ligne.
+ */
+export const EPOCH = '2026-08-20';
 
 export function puzzleNumber(key: string): number {
     const day = 86_400_000;
     return Math.max(1, Math.round((Date.parse(key) - Date.parse(EPOCH)) / day) + 1);
+}
+
+/**
+ * Un jour jouable : au format attendu, pas avant l'origine, pas dans l'avenir.
+ *
+ * ⚠️ La borne haute n'est pas cosmétique. Sans elle, `?d=2030-01-01` révélerait
+ * le pays d'un jour à venir, et le score partagé du jour ne voudrait plus rien
+ * dire.
+ */
+export function isPlayableDay(key: string, today: string = dayKey()): boolean {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return false;
+    // ⚠️ Le motif ne suffit pas : « 2026-13-01 » et « 2026-02-30 » le passent
+    // et donnent une date invalide, sur laquelle `dayKey` lève. On repasse par
+    // le calendrier, qui rejette aussi les 31 février.
+    const date = new Date(`${key}T12:00:00Z`);
+    if (Number.isNaN(date.getTime()) || date.toISOString().slice(0, 10) !== key) return false;
+    return key >= EPOCH && key <= today;
+}
+
+/** Tous les jours jouables, du plus récent au plus ancien. */
+export function playableDays(today: string = dayKey()): string[] {
+    const days: string[] = [];
+    for (let key = today; key >= EPOCH; key = previousDay(key)) days.push(key);
+    return days;
+}
+
+/**
+ * La date telle qu'on l'écrit dans la langue du visiteur.
+ *
+ * Midi UTC comme point d'ancrage : à minuit, le fuseau de la machine ferait
+ * afficher la veille à un visiteur situé à l'ouest.
+ */
+export function formatDay(
+    key: string,
+    locale: string,
+    options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' },
+): string {
+    return new Intl.DateTimeFormat(locale, { ...options, timeZone: 'UTC' }).format(
+        new Date(`${key}T12:00:00Z`),
+    );
 }
 
 /**

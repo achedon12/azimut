@@ -1,8 +1,8 @@
 import { DEFAULT_LOCALE, type Locale } from './config';
 
-export type RouteKey = 'home' | 'rules' | 'about';
+export type RouteKey = 'home' | 'rules' | 'about' | 'archives';
 
-export const CONTENT_KEYS = ['rules', 'about'] as const;
+export const CONTENT_KEYS = ['rules', 'about', 'archives'] as const;
 
 export type ContentKey = (typeof CONTENT_KEYS)[number];
 
@@ -21,6 +21,7 @@ const SLUGS: Record<RouteKey, Record<Locale, string>> = {
     // Les règles, elles, gardent des slugs traduits — c'est une exception
     // pour cette page-là, pas un renoncement à la règle générale.
     about: { fr: 'about', en: 'about', es: 'about', de: 'about' },
+    archives: { fr: 'archives', en: 'archive', es: 'archivo', de: 'archiv' },
 };
 
 export function path(key: RouteKey, locale: Locale): string {
