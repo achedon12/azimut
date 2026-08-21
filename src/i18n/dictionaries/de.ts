@@ -185,11 +185,11 @@ export const de: Dictionary = {
         heading: 'Impressum',
         lede: 'Die gesetzlich vorgeschriebenen Angaben für eine öffentlich zugängliche Seite.',
         metaDescription:
-            'Herausgeber, Hoster und Nutzungsbedingungen von azimut.leoderoin.fr, dem täglichen Geografiespiel.',
+            'Herausgeber, Hoster und Nutzungsbedingungen von azimut.page, dem täglichen Geografiespiel.',
         sections: [
             {
                 title: 'Herausgeber',
-                body: 'Die Seite azimut.leoderoin.fr wird von {author} herausgegeben, persönlich und nicht gewerblich. Verantwortlich für den Inhalt ist der Herausgeber selbst.',
+                body: 'Die Seite azimut.page wird von {author} herausgegeben, persönlich und nicht gewerblich. Verantwortlich für den Inhalt ist der Herausgeber selbst.',
             },
             {
                 title: 'Hoster',

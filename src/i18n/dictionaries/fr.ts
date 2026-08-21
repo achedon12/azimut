@@ -185,11 +185,11 @@ export const fr = {
         heading: 'Mentions légales',
         lede: 'Les informations exigées par la loi pour un site accessible au public.',
         metaDescription:
-            'Éditeur, hébergeur et conditions d’utilisation d’azimut.leoderoin.fr, le jeu de géographie quotidien.',
+            'Éditeur, hébergeur et conditions d’utilisation d’azimut.page, le jeu de géographie quotidien.',
         sections: [
             {
                 title: 'Éditeur',
-                body: 'Le site azimut.leoderoin.fr est édité par {author}, à titre personnel et non commercial. Le directeur de la publication est l’éditeur lui-même.',
+                body: 'Le site azimut.page est édité par {author}, à titre personnel et non commercial. Le directeur de la publication est l’éditeur lui-même.',
             },
             {
                 title: 'Hébergeur',

@@ -185,11 +185,11 @@ export const en: Dictionary = {
         heading: 'Legal notice',
         lede: 'The information the law requires for a publicly accessible site.',
         metaDescription:
-            'Publisher, host and terms of use for azimut.leoderoin.fr, the daily geography game.',
+            'Publisher, host and terms of use for azimut.page, the daily geography game.',
         sections: [
             {
                 title: 'Publisher',
-                body: 'azimut.leoderoin.fr is published by {author}, personally and on a non-commercial basis. The publication director is the publisher themselves.',
+                body: 'azimut.page is published by {author}, personally and on a non-commercial basis. The publication director is the publisher themselves.',
             },
             {
                 title: 'Host',

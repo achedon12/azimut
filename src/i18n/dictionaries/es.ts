@@ -185,11 +185,11 @@ export const es: Dictionary = {
         heading: 'Aviso legal',
         lede: 'La información que la ley exige para un sitio accesible al público.',
         metaDescription:
-            'Editor, alojamiento y condiciones de uso de azimut.leoderoin.fr, el juego de geografía diario.',
+            'Editor, alojamiento y condiciones de uso de azimut.page, el juego de geografía diario.',
         sections: [
             {
                 title: 'Editor',
-                body: 'El sitio azimut.leoderoin.fr está editado por {author}, a título personal y sin fines comerciales. El director de la publicación es el propio editor.',
+                body: 'El sitio azimut.page está editado por {author}, a título personal y sin fines comerciales. El director de la publicación es el propio editor.',
             },
             {
                 title: 'Alojamiento',
