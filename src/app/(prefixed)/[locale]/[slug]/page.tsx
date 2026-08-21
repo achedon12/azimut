@@ -7,6 +7,8 @@ import { contentKeyForSlug, contentParams } from '@/i18n/routes';
 import { buildBreadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 import { AboutView } from '@/views/AboutView';
 import { ArchiveView } from '@/views/ArchiveView';
+import { ChangelogView } from '@/views/ChangelogView';
+import { TextPageView } from '@/views/TextPageView';
 import { RulesView } from '@/views/RulesView';
 
 // Segment dynamique plutôt qu'un dossier par langue : les slugs sont TRADUITS
@@ -43,10 +45,16 @@ export default async function Page({
 
     return (
         <Console locale={locale} routeKey={key} readout={d[key].title}>
+            {/* Une table plutôt qu'une cascade de ternaires : à six pages, la
+                cascade devient illisible. */}
             {key === 'about' ? (
                 <AboutView locale={locale} />
             ) : key === 'archives' ? (
                 <ArchiveView locale={locale} />
+            ) : key === 'changelog' ? (
+                <ChangelogView locale={locale} />
+            ) : key === 'legal' || key === 'privacy' ? (
+                <TextPageView locale={locale} page={key} />
             ) : (
                 <RulesView locale={locale} />
             )}

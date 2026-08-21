@@ -1,4 +1,4 @@
-# Stack de PRODUCTION d'azimut.leoderoin.fr.
+# Stack de PRODUCTION d'azimut.page.
 #
 # Le site est entièrement statique : un seul conteneur nginx, aucune base,
 # aucun processus Node. La partie du jour est calculée dans le navigateur à
@@ -23,7 +23,7 @@ services:
       # connues à la CONSTRUCTION. Une NEXT_PUBLIC_SITE_URL fausse donne un
       # site qui s'affiche parfaitement et se référence sur le mauvais domaine.
       args:
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://azimut.leoderoin.fr}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://azimut.page}
         NEXT_PUBLIC_APP_VERSION: ${NEXT_PUBLIC_APP_VERSION:-0.1.0}
         NEXT_PUBLIC_MATOMO_URL: ${NEXT_PUBLIC_MATOMO_URL:-}
         NEXT_PUBLIC_MATOMO_SITE_ID: ${NEXT_PUBLIC_MATOMO_SITE_ID:-}

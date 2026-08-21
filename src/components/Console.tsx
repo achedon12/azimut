@@ -102,7 +102,7 @@ export function Console({
 
                     <div className="h-px bg-border-subtle" />
 
-                    <Credits dictionary={d} />
+                    <Credits locale={locale} dictionary={d} />
                 </div>
             </footer>
         </>

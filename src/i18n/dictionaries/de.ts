@@ -157,6 +157,93 @@ export const de: Dictionary = {
         otherGames: 'Meine anderen Spiele',
         versionLabel: 'Version {version}',
     },
+    changelog: {
+        title: 'Neuigkeiten',
+        heading: 'Was sich geändert hat',
+        lede: 'Die Entwicklung des Spiels, vom Neuesten zum Ältesten.',
+        metaDescription:
+            'Die Entwicklung von Azimut, Version für Version: neue Funktionen, Korrekturen und Regeländerungen. Das Änderungsprotokoll des täglichen Geografiespiels.',
+        entries: [
+            {
+                version: '0.1.0',
+                date: '2026-08-21',
+                title: 'Erste Fassung',
+                changes: [
+                    'Das Spiel: eine Landsilhouette pro Tag, sechs Versuche, Entfernung und Richtung nach jedem.',
+                    'Frühere Rätsel lassen sich über einen Kalender nachspielen, zurück bis zum 1. Januar 2026.',
+                    'Statistik und Serie bleiben im Browser. Frühere Rätsel zählen nicht für die Serie.',
+                    'Länderkarte am Ende: Kontinent, Bevölkerung und Lage auf der Weltkarte.',
+                    'Ein freiwilliger Hinweis nach drei Versuchen.',
+                    'Vier Sprachen, helles und dunkles Thema, und das Spiel läuft auch offline.',
+                ],
+            },
+        ],
+        back: 'Spielen',
+    },
+    legal: {
+        title: 'Impressum',
+        heading: 'Impressum',
+        lede: 'Die gesetzlich vorgeschriebenen Angaben für eine öffentlich zugängliche Seite.',
+        metaDescription:
+            'Herausgeber, Hoster und Nutzungsbedingungen von azimut.leoderoin.fr, dem täglichen Geografiespiel.',
+        sections: [
+            {
+                title: 'Herausgeber',
+                body: 'Die Seite azimut.leoderoin.fr wird von {author} herausgegeben, persönlich und nicht gewerblich. Verantwortlich für den Inhalt ist der Herausgeber selbst.',
+            },
+            {
+                title: 'Hoster',
+                body: 'Die Seite wird gehostet von {host}, {address}. Telefon: {phone}. Handelsregisternummer {registration}.',
+            },
+            {
+                title: 'Inhalt',
+                body: 'Texte und Gestaltung dieser Seite stammen vom Herausgeber. Die Landesgrenzen stammen von Natural Earth und sind gemeinfrei. Die Ländernamen stammen aus derselben Quelle.',
+            },
+            {
+                title: 'Ausgehende Links',
+                body: 'Diese Seite verlinkt nur auf jeux.leoderoin.fr, die persönliche Seite des Autors und das öffentliche Code-Repository. Sie zeigt keine Werbung und enthält keine kommerziellen oder Affiliate-Links.',
+            },
+        ],
+        contactTitle: 'Kontakt',
+        contactBody: 'Bei Fragen zu diesem Impressum:',
+        back: 'Spielen',
+    },
+    privacy: {
+        title: 'Datenschutz',
+        heading: 'Datenschutz',
+        lede: 'Was gemessen wird, was nicht, und wo es bleibt.',
+        metaDescription:
+            'Was Azimut misst, was nicht, und was in deinem Browser bleibt. Kein Konto, kein Tracker von Dritten, kein Messcookie.',
+        sections: [
+            {
+                title: 'Deine Spiele',
+                body: 'Deine Versuche, Statistiken und deine Serie bleiben im lokalen Speicher deines Browsers. Sie werden NIE an einen Server gesendet: es gibt keinen. Du kannst sie mit einer Schaltfläche auf der Seite „Über“ löschen.',
+            },
+            {
+                title: 'Reichweitenmessung',
+                body: 'Die Seite nutzt Matomo, installiert auf demselben Server. Erfasst werden aufgerufene Seiten, Browsersprache, Gerätetyp und verweisende Seite. Keine Daten gehen an Dritte, und es gibt weder Werbenetzwerk noch eingebettete soziale Netzwerke.',
+            },
+            {
+                title: 'Cookies',
+                body: 'Keine. Matomo läuft ohne Cookies und beachtet das „Do Not Track“-Signal deines Browsers — deshalb zeigt diese Seite kein Einwilligungsbanner. Deine Themenwahl bleibt im lokalen Speicher und wird nie an den Server gesendet.',
+            },
+            {
+                title: 'Offline-Nutzung',
+                body: 'Ein Service Worker legt die Dateien der Seite im Cache ab, damit das Spiel ohne Netz läuft. Er behält nur diese Dateien — keine Daten über dich — und verschwindet, wenn du die Daten der Seite im Browser löschst.',
+            },
+            {
+                title: 'Server-Protokolle',
+                body: 'Wie jeder Webserver führt auch dieser technische Zugriffsprotokolle: IP-Adresse, Datum, angeforderte Seite. Sie dienen der Diagnose und der Sicherheit, sonst nichts.',
+            },
+            {
+                title: 'Deine Rechte',
+                body: 'Du kannst Auskunft über die dich betreffenden Daten, ihre Berichtigung oder ihre Löschung verlangen. Die Anfrage erfolgt per E-Mail und braucht keine Begründung.',
+            },
+        ],
+        contactTitle: 'Schreiben',
+        contactBody: 'Um deine Rechte auszuüben oder eine Frage zu stellen:',
+        back: 'Spielen',
+    },
     continents: {
         africa: 'Afrika',
         asia: 'Asien',

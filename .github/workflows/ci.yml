@@ -28,7 +28,7 @@ jobs:
       # construction réussirait sur un mauvais domaine sans rien signaler.
       - run: npm run build
         env:
-          NEXT_PUBLIC_SITE_URL: https://azimut.leoderoin.fr
+          NEXT_PUBLIC_SITE_URL: https://azimut.page
 
       # Garde-fous sur ce que le référencement ne pardonne pas.
       - name: Vérifier les balises de référencement
@@ -39,7 +39,7 @@ jobs:
             count=$(grep -o '<link rel="alternate"' "$page" | wc -l)
             [ "$count" -eq 5 ] || { echo "$page déclare $count alternatives au lieu de 5"; exit 1; }
           done
-          grep -q 'azimut.leoderoin.fr' out/sitemap.xml
+          grep -q 'azimut.page' out/sitemap.xml
           echo "Référencement conforme."
 
       # `prune-export` retire /404/ et /_not-found/, qui répondraient 200 et

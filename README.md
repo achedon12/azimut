@@ -3,7 +3,7 @@
 Un jeu de géographie quotidien. Une silhouette de pays, six essais, et à chaque
 proposition la **distance** et le **cap** qui vous séparent de la réponse.
 
-**→ [azimut.leoderoin.fr](https://azimut.leoderoin.fr)**
+**→ [azimut.page](https://azimut.page)**
 
 Le même pays pour tout le monde, chaque jour, sans compte et sans publicité. Un
 jour manqué n'est pas perdu : toutes les parties passées restent jouables depuis

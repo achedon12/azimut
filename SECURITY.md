@@ -36,4 +36,4 @@ sans classement — rien ne dépend de la confidentialité de la réponse.
 
 ## Versions maintenues
 
-Seule la version en ligne sur https://azimut.leoderoin.fr l'est.
+Seule la version en ligne sur https://azimut.page l'est.

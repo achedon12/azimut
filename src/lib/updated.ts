@@ -13,4 +13,7 @@ export const UPDATED: Record<RouteKey, string> = {
     rules: '2026-08-20',
     about: '2026-08-20',
     archives: '2026-08-20',
+    changelog: '2026-08-21',
+    legal: '2026-08-21',
+    privacy: '2026-08-21',
 };

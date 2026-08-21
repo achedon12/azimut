@@ -20,6 +20,10 @@ const PAGES: { key: RouteKey; priority: number; changeFrequency: 'daily' | 'mont
     // que l'accueil.
     { key: 'archives', priority: 0.5, changeFrequency: 'daily' },
     { key: 'about', priority: 0.4, changeFrequency: 'monthly' },
+    { key: 'changelog', priority: 0.4, changeFrequency: 'monthly' },
+    // Obligatoires et indexables, mais elles n'ont pas à concurrencer le jeu.
+    { key: 'legal', priority: 0.2, changeFrequency: 'monthly' },
+    { key: 'privacy', priority: 0.2, changeFrequency: 'monthly' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

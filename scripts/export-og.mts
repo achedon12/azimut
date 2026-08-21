@@ -45,7 +45,7 @@ function svg(d: typeof fr): string {
   </g>
 
   <text x="86" y="470" font-family="${FONT}" font-size="30" font-weight="bold" fill="#15233b">${esc(d.game.prompt)}</text>
-  <text x="86" y="530" font-family="${FONT}" font-size="25" font-weight="bold" fill="#7b8aa1" letter-spacing="1">azimut.leoderoin.fr</text>
+  <text x="86" y="530" font-family="${FONT}" font-size="25" font-weight="bold" fill="#7b8aa1" letter-spacing="1">azimut.page</text>
 </svg>`;
 }
 

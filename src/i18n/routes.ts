@@ -1,8 +1,8 @@
 import { DEFAULT_LOCALE, type Locale } from './config';
 
-export type RouteKey = 'home' | 'rules' | 'about' | 'archives';
+export type RouteKey = 'home' | 'rules' | 'about' | 'archives' | 'changelog' | 'legal' | 'privacy';
 
-export const CONTENT_KEYS = ['rules', 'about', 'archives'] as const;
+export const CONTENT_KEYS = ['rules', 'about', 'archives', 'changelog', 'legal', 'privacy'] as const;
 
 export type ContentKey = (typeof CONTENT_KEYS)[number];
 
@@ -22,6 +22,9 @@ const SLUGS: Record<RouteKey, Record<Locale, string>> = {
     // pour cette page-là, pas un renoncement à la règle générale.
     about: { fr: 'about', en: 'about', es: 'about', de: 'about' },
     archives: { fr: 'archives', en: 'archive', es: 'archivo', de: 'archiv' },
+    changelog: { fr: 'nouveautes', en: 'changelog', es: 'novedades', de: 'neuigkeiten' },
+    legal: { fr: 'mentions-legales', en: 'legal-notice', es: 'aviso-legal', de: 'impressum' },
+    privacy: { fr: 'confidentialite', en: 'privacy', es: 'privacidad', de: 'datenschutz' },
 };
 
 export function path(key: RouteKey, locale: Locale): string {

@@ -157,6 +157,93 @@ export const fr = {
         otherGames: 'Mes autres jeux',
         versionLabel: 'Version {version}',
     },
+    changelog: {
+        title: 'Nouveautés',
+        heading: 'Ce qui a changé',
+        lede: 'Les évolutions du jeu, de la plus récente à la plus ancienne.',
+        metaDescription:
+            'Les évolutions d’Azimut, version par version : nouvelles fonctionnalités, corrections et changements de règle. Le journal des modifications du jeu de géographie quotidien.',
+        entries: [
+            {
+                version: '0.1.0',
+                date: '2026-08-21',
+                title: 'Première version',
+                changes: [
+                    'Le jeu : une silhouette de pays par jour, six essais, la distance et le cap à chaque proposition.',
+                    'Les parties passées se rejouent depuis un calendrier, jusqu’au 1er janvier 2026.',
+                    'Statistiques et série conservées dans le navigateur. Les archives ne comptent pas dans la série.',
+                    'Fiche du pays en fin de partie : continent, population et situation sur la carte du monde.',
+                    'Un indice facultatif après trois essais.',
+                    'Quatre langues, thème clair et sombre, et le jeu reste jouable hors ligne.',
+                ],
+            },
+        ],
+        back: 'Jouer',
+    },
+    legal: {
+        title: 'Mentions légales',
+        heading: 'Mentions légales',
+        lede: 'Les informations exigées par la loi pour un site accessible au public.',
+        metaDescription:
+            'Éditeur, hébergeur et conditions d’utilisation d’azimut.leoderoin.fr, le jeu de géographie quotidien.',
+        sections: [
+            {
+                title: 'Éditeur',
+                body: 'Le site azimut.leoderoin.fr est édité par {author}, à titre personnel et non commercial. Le directeur de la publication est l’éditeur lui-même.',
+            },
+            {
+                title: 'Hébergeur',
+                body: 'Le site est hébergé par {host}, {address}. Téléphone : {phone}. SIREN {registration}.',
+            },
+            {
+                title: 'Contenu',
+                body: 'Les textes et l’habillage de ce site sont l’œuvre de son éditeur. Les frontières des pays proviennent de Natural Earth, dans le domaine public. Les noms de pays sont ceux de cette même source.',
+            },
+            {
+                title: 'Liens sortants',
+                body: 'Ce site ne renvoie que vers jeux.leoderoin.fr, le site personnel de son auteur et le dépôt public du code. Il n’affiche aucune publicité et ne comporte aucun lien commercial ni affilié.',
+            },
+        ],
+        contactTitle: 'Contact',
+        contactBody: 'Pour toute question relative à ces mentions :',
+        back: 'Jouer',
+    },
+    privacy: {
+        title: 'Confidentialité',
+        heading: 'Confidentialité',
+        lede: 'Ce qui est mesuré, ce qui ne l’est pas, et où ça reste.',
+        metaDescription:
+            'Ce qui est mesuré sur Azimut, ce qui ne l’est pas, et ce qui reste dans votre navigateur. Aucun compte, aucun traqueur tiers, aucun cookie de mesure.',
+        sections: [
+            {
+                title: 'Vos parties',
+                body: 'Vos essais, vos statistiques et votre série sont conservés dans le stockage local de votre navigateur. Ils ne sont JAMAIS envoyés à un serveur : il n’y en a pas. Vous pouvez les effacer d’un bouton, depuis la page « à propos ».',
+            },
+            {
+                title: 'Mesure d’audience',
+                body: 'Le site utilise Matomo, installé sur le même serveur que lui. Sont enregistrés les pages consultées, la langue du navigateur, le type d’appareil et la page de provenance. Aucune donnée n’est transmise à un service tiers, et il n’y a ni régie publicitaire ni réseau social embarqué.',
+            },
+            {
+                title: 'Cookies',
+                body: 'Aucun. Matomo est configuré sans cookie et respecte le signal « Do Not Track » de votre navigateur, ce qui dispense ce site de bandeau de consentement. Votre choix de thème est conservé dans le stockage local, jamais envoyé au serveur.',
+            },
+            {
+                title: 'Fonctionnement hors ligne',
+                body: 'Un travailleur de service met en cache les fichiers du site pour qu’il reste jouable sans réseau. Il ne conserve que ces fichiers — aucune donnée vous concernant — et disparaît si vous effacez les données du site depuis votre navigateur.',
+            },
+            {
+                title: 'Journaux du serveur',
+                body: 'Comme tout serveur web, celui-ci conserve des journaux d’accès techniques : adresse IP, date, page demandée. Ils servent au diagnostic et à la sécurité, et ne sont exploités à aucune autre fin.',
+            },
+            {
+                title: 'Vos droits',
+                body: 'Vous pouvez demander l’accès aux données vous concernant, leur rectification ou leur effacement. La demande se fait par courriel et n’a pas besoin d’être motivée.',
+            },
+        ],
+        contactTitle: 'Écrire',
+        contactBody: 'Pour exercer vos droits ou poser une question :',
+        back: 'Jouer',
+    },
     continents: {
         africa: 'Afrique',
         asia: 'Asie',

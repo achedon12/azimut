@@ -157,6 +157,93 @@ export const es: Dictionary = {
         otherGames: 'Mis otros juegos',
         versionLabel: 'Versión {version}',
     },
+    changelog: {
+        title: 'Novedades',
+        heading: 'Qué ha cambiado',
+        lede: 'La evolución del juego, de lo más reciente a lo más antiguo.',
+        metaDescription:
+            'La evolución de Azimut, versión a versión: nuevas funciones, correcciones y cambios de reglas. El registro de cambios del juego de geografía diario.',
+        entries: [
+            {
+                version: '0.1.0',
+                date: '2026-08-21',
+                title: 'Primera versión',
+                changes: [
+                    'El juego: una silueta de país al día, seis intentos, distancia y dirección tras cada uno.',
+                    'Las partidas anteriores se pueden volver a jugar desde un calendario, hasta el 1 de enero de 2026.',
+                    'Estadísticas y racha guardadas en el navegador. Las partidas anteriores no cuentan para la racha.',
+                    'Ficha del país al terminar: continente, población y ubicación en el mapa del mundo.',
+                    'Una pista opcional tras tres intentos.',
+                    'Cuatro idiomas, tema claro y oscuro, y el juego sigue jugable sin conexión.',
+                ],
+            },
+        ],
+        back: 'Jugar',
+    },
+    legal: {
+        title: 'Aviso legal',
+        heading: 'Aviso legal',
+        lede: 'La información que la ley exige para un sitio accesible al público.',
+        metaDescription:
+            'Editor, alojamiento y condiciones de uso de azimut.leoderoin.fr, el juego de geografía diario.',
+        sections: [
+            {
+                title: 'Editor',
+                body: 'El sitio azimut.leoderoin.fr está editado por {author}, a título personal y sin fines comerciales. El director de la publicación es el propio editor.',
+            },
+            {
+                title: 'Alojamiento',
+                body: 'El sitio está alojado por {host}, {address}. Teléfono: {phone}. SIREN {registration}.',
+            },
+            {
+                title: 'Contenido',
+                body: 'Los textos y el diseño de este sitio son obra de su editor. Las fronteras de los países proceden de Natural Earth, de dominio público. Los nombres de los países proceden de esa misma fuente.',
+            },
+            {
+                title: 'Enlaces salientes',
+                body: 'Este sitio solo enlaza con jeux.leoderoin.fr, el sitio personal de su autor y el repositorio público del código. No muestra publicidad ni contiene enlaces comerciales o de afiliación.',
+            },
+        ],
+        contactTitle: 'Contacto',
+        contactBody: 'Para cualquier duda sobre este aviso:',
+        back: 'Jugar',
+    },
+    privacy: {
+        title: 'Privacidad',
+        heading: 'Privacidad',
+        lede: 'Qué se mide, qué no, y dónde se queda.',
+        metaDescription:
+            'Qué mide Azimut, qué no mide y qué se queda en tu navegador. Sin cuenta, sin rastreadores de terceros, sin cookies de medición.',
+        sections: [
+            {
+                title: 'Tus partidas',
+                body: 'Tus intentos, estadísticas y racha se guardan en el almacenamiento local de tu navegador. NUNCA se envían a un servidor: no lo hay. Puedes borrarlos con un botón, desde la página «acerca de».',
+            },
+            {
+                title: 'Medición de audiencia',
+                body: 'El sitio usa Matomo, instalado en el mismo servidor. Registra las páginas vistas, el idioma del navegador, el tipo de dispositivo y la página de origen. Ningún dato se transmite a un servicio externo, y no hay red publicitaria ni widget social incrustado.',
+            },
+            {
+                title: 'Cookies',
+                body: 'Ninguna. Matomo funciona sin cookies y respeta la señal «Do Not Track» de tu navegador, por lo que este sitio no muestra banner de consentimiento. Tu elección de tema se guarda en el almacenamiento local, nunca se envía al servidor.',
+            },
+            {
+                title: 'Uso sin conexión',
+                body: 'Un service worker guarda en caché los archivos del sitio para que el juego siga funcionando sin red. Solo conserva esos archivos —ningún dato sobre ti— y desaparece si borras los datos del sitio desde tu navegador.',
+            },
+            {
+                title: 'Registros del servidor',
+                body: 'Como todo servidor web, este conserva registros técnicos de acceso: dirección IP, fecha, página solicitada. Sirven para el diagnóstico y la seguridad, y no se usan para nada más.',
+            },
+            {
+                title: 'Tus derechos',
+                body: 'Puedes solicitar el acceso a los datos que te conciernen, su rectificación o su supresión. La solicitud se hace por correo y no necesita justificación.',
+            },
+        ],
+        contactTitle: 'Escribir',
+        contactBody: 'Para ejercer tus derechos o hacer una pregunta:',
+        back: 'Jugar',
+    },
     continents: {
         africa: 'África',
         asia: 'Asia',

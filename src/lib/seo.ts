@@ -125,7 +125,7 @@ function game(locale: Locale, d: Dict, home: string) {
  * Le fil d'Ariane d'une page annexe.
  *
  * C'est ce qui remplace l'URL brute sous le titre dans les résultats de
- * recherche : `Azimut › Comment on joue` plutôt que `azimut.leoderoin.fr/regles`.
+ * recherche : `Azimut › Comment on joue` plutôt que `azimut.page/regles`.
  */
 export function buildBreadcrumbJsonLd(locale: Locale, key: Exclude<RouteKey, 'home'>): string {
     const d = getDictionary(locale);

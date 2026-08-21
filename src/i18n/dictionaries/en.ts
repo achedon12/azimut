@@ -157,6 +157,93 @@ export const en: Dictionary = {
         otherGames: 'My other games',
         versionLabel: 'Version {version}',
     },
+    changelog: {
+        title: 'What’s new',
+        heading: 'What has changed',
+        lede: 'How the game has evolved, newest first.',
+        metaDescription:
+            'How Azimut has evolved, version by version: new features, fixes and rule changes. The changelog of the daily geography game.',
+        entries: [
+            {
+                version: '0.1.0',
+                date: '2026-08-21',
+                title: 'First release',
+                changes: [
+                    'The game: one country outline a day, six guesses, distance and bearing after each one.',
+                    'Past puzzles can be replayed from a calendar, back to 1 January 2026.',
+                    'Statistics and streak kept in your browser. Past puzzles do not count towards the streak.',
+                    'Country card at the end: continent, population and location on the world map.',
+                    'An optional hint after three guesses.',
+                    'Four languages, light and dark themes, and the game stays playable offline.',
+                ],
+            },
+        ],
+        back: 'Play',
+    },
+    legal: {
+        title: 'Legal notice',
+        heading: 'Legal notice',
+        lede: 'The information the law requires for a publicly accessible site.',
+        metaDescription:
+            'Publisher, host and terms of use for azimut.leoderoin.fr, the daily geography game.',
+        sections: [
+            {
+                title: 'Publisher',
+                body: 'azimut.leoderoin.fr is published by {author}, personally and on a non-commercial basis. The publication director is the publisher themselves.',
+            },
+            {
+                title: 'Host',
+                body: 'The site is hosted by {host}, {address}. Phone: {phone}. Company number {registration}.',
+            },
+            {
+                title: 'Content',
+                body: 'The text and design of this site are the work of its publisher. Country borders come from Natural Earth, in the public domain. Country names come from that same source.',
+            },
+            {
+                title: 'Outbound links',
+                body: 'This site only links to jeux.leoderoin.fr, its author’s personal site and the public code repository. It shows no advertising and carries no commercial or affiliate links.',
+            },
+        ],
+        contactTitle: 'Contact',
+        contactBody: 'For any question about this notice:',
+        back: 'Play',
+    },
+    privacy: {
+        title: 'Privacy',
+        heading: 'Privacy',
+        lede: 'What is measured, what is not, and where it stays.',
+        metaDescription:
+            'What Azimut measures, what it does not, and what stays in your browser. No account, no third-party tracker, no analytics cookie.',
+        sections: [
+            {
+                title: 'Your games',
+                body: 'Your guesses, statistics and streak are kept in your browser’s local storage. They are NEVER sent to a server: there is none. You can erase them with one button, from the about page.',
+            },
+            {
+                title: 'Analytics',
+                body: 'The site uses Matomo, installed on the same server. It records pages viewed, browser language, device type and referring page. No data is sent to a third-party service, and there is no ad network or embedded social widget.',
+            },
+            {
+                title: 'Cookies',
+                body: 'None. Matomo runs cookie-free and honours your browser’s “Do Not Track” signal, which is why this site shows no consent banner. Your theme choice is kept in local storage, never sent to the server.',
+            },
+            {
+                title: 'Offline use',
+                body: 'A service worker caches the site’s files so the game stays playable without a network. It keeps only those files — no data about you — and disappears if you clear the site’s data from your browser.',
+            },
+            {
+                title: 'Server logs',
+                body: 'Like any web server, this one keeps technical access logs: IP address, date, page requested. They are used for diagnostics and security, and for nothing else.',
+            },
+            {
+                title: 'Your rights',
+                body: 'You may request access to data concerning you, its correction or its erasure. Requests are made by email and need no justification.',
+            },
+        ],
+        contactTitle: 'Write',
+        contactBody: 'To exercise your rights or ask a question:',
+        back: 'Play',
+    },
     continents: {
         africa: 'Africa',
         asia: 'Asia',

@@ -17,7 +17,7 @@ WORKDIR /app
 # passer au démarrage du conteneur n'a aucun effet, il faut les fournir ici.
 # NEXT_PUBLIC_SITE_URL n'est pas cosmétique — c'est elle qui écrit les URL
 # canoniques, les hreflang et le sitemap.
-ARG NEXT_PUBLIC_SITE_URL=https://azimut.leoderoin.fr
+ARG NEXT_PUBLIC_SITE_URL=https://azimut.page
 ARG NEXT_PUBLIC_APP_VERSION=0.1.0
 ARG NEXT_PUBLIC_MATOMO_URL=""
 ARG NEXT_PUBLIC_MATOMO_SITE_ID=""
