@@ -16,6 +16,11 @@ export const display = localFont({
 
 export const mono = localFont({
     src: './roboto-mono-latin-wght-normal.woff2',
+    // ⚠️ PAS de préchargement. La mono ne sert qu'aux chiffres — jamais au plus
+    // grand bloc de texte de l'écran. Préchargée, elle disputait la bande
+    // passante à la police de texte sur le chemin critique, et repoussait le
+    // plus grand rendu de 2,5 s en profil mobile simulé.
+    preload: false,
     variable: '--font-mono-local',
     weight: '100 700',
     display: 'swap',

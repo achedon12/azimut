@@ -82,11 +82,20 @@ export function ArchiveView({ locale }: { locale: Locale }) {
     const { day: today } = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     const [month, setMonth] = useState<string | null>(null);
 
+    // ⚠️ La MÊME hauteur que le calendrier, réservée d'avance. Le jour dépend
+    // du fuseau et n'existe qu'après hydratation : sans cette réserve, la page
+    // s'allongeait d'un coup au montage et le décalage cumulé montait à 0,287,
+    // très au-dessus du seuil de 0,1.
     if (!today) {
         return (
-            <div className="mx-auto w-full max-w-md px-5 py-8">
-                <h1 className="text-xl font-semibold tracking-tight">{d.archives.title}</h1>
-                <p className="mt-2 text-[0.9rem] text-fg-muted">{d.archives.lede}</p>
+            <div className="mx-auto flex w-full max-w-md flex-col gap-5 px-5 py-8">
+                <header className="flex flex-col gap-2">
+                    <h1 className="text-xl font-semibold tracking-tight">{d.archives.title}</h1>
+                    <p className="text-[0.9rem] text-fg-muted">{d.archives.lede}</p>
+                    <p className="numeric text-[0.8rem] text-accent">&nbsp;</p>
+                </header>
+                <div aria-hidden="true" className="h-[26.5rem] rounded-md border border-border-subtle" />
+                <p className="text-[0.75rem] leading-relaxed text-fg-muted">{d.archives.note}</p>
             </div>
         );
     }

@@ -60,3 +60,8 @@ jobs:
       # qui garantit qu'il donnera les mêmes pays dans dix ans qu'aujourd'hui.
       - name: Vérifier la stabilité du calendrier
         run: npx tsx scripts/check-schedule.mts
+
+      # Les polices sont réduites à ce que le site emploie. Un caractère absent
+      # s'affiche en carré vide, et seulement dans la langue qui l'emploie.
+      - name: Vérifier la couverture des polices
+        run: npx tsx scripts/check-fonts.mts

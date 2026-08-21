@@ -17,7 +17,7 @@ function WithAuthor({ template }: { template: string }) {
                 <Fragment key={i}>
                     {part}
                     {i < parts.length - 1 && (
-                        <a href={AUTHOR.site} rel="author" className="text-fg underline-offset-4 hover:underline">
+                        <a href={AUTHOR.site} rel="author" className="text-fg underline underline-offset-4">
                             {AUTHOR.name}
                         </a>
                     )}
@@ -51,7 +51,7 @@ export function AboutView({ locale }: { locale: Locale }) {
                     <dt className="label text-fg-muted">{d.about.contactTitle}</dt>
                     <dd className="m-0 leading-relaxed">
                         {d.about.contactBody}{' '}
-                        <a href={`mailto:${AUTHOR.email}`} className="text-accent underline-offset-4 hover:underline">
+                        <a href={`mailto:${AUTHOR.email}`} className="text-accent underline underline-offset-4">
                             {AUTHOR.email}
                         </a>
                     </dd>

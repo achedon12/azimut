@@ -5,20 +5,41 @@ production.
 
 ## Scores Lighthouse
 
-| Catégorie | Score |
-|---|---|
-| Performance | 99 |
-| Accessibilité | 100 |
-| Bonnes pratiques | 100 |
-| SEO | 100 |
+Mesurés sur le CONTENEUR de production, pas sur un serveur de fichiers : gzip et
+en-têtes de cache changent tout, et c'est ce que PageSpeed Insights verra.
 
-Relancer après tout changement de mise en page, de police, de couleur ou de
-configuration nginx :
+| Catégorie | Bureau | Mobile |
+|---|---|---|
+| Performance | **100** | 95 – 98 |
+| Accessibilité | **100** | **100** |
+| Bonnes pratiques | **100** | **100** |
+| SEO | **100** | **100** |
 
-```bash
-docker compose -p azimut up -d --build
-npx lighthouse@12 http://127.0.0.1:3007/ --preset=desktop --view
-```
+Vérifié sur six pages : accueil, règles, archives, à propos, plus une page
+anglaise et une allemande.
+
+### Pourquoi la performance mobile plafonne sous 100
+
+Le déficit vient ENTIÈREMENT du plus grand rendu (LCP) tel que Lighthouse le
+*simule* sur un profil 4G lente avec un processeur quatre fois ralenti. La
+valeur OBSERVÉE est de 59 ms : la page peint immédiatement.
+
+Deux expériences délimitent le problème :
+
+- retirer le préchargement de la police mono, qui ne sert qu'aux chiffres et
+  disputait la bande passante à la police de texte : 95 → 99 sur l'accueil ;
+- retirer TOUTE police web : 99, LCP 2,1 s. Le plafond n'est donc pas la
+  typographie — il tient au TTFB simulé (452 ms) et au poids du jeu lui-même,
+  qui embarque les 168 pays pour pouvoir calculer la partie sans serveur.
+
+Trois pistes ont été essayées et écartées, mesures à l'appui : `font-display:
+optional` (96, le blocage initial retarde le premier rendu), retirer aussi le
+préchargement de la police de texte (95, le premier rendu passe de 0,8 à 1,4 s),
+et réduire le CSS (déjà à 100 sur `unused-css-rules`).
+
+Ce qui a été retenu : sous-ensemble des polices aux graisses 400–700 et au latin
+utilisé (−23 % et −34 %), cibles navigateurs modernes pour supprimer les
+polyfills, et préchargement de la seule police de texte.
 
 ## Ce qui est en place
 

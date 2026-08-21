@@ -10,11 +10,12 @@
         "typecheck": "tsc --noEmit",
         "countries": "tsx scripts/build-countries.mts",
         "nginx": "tsx scripts/gen-nginx-redirects.mts",
-        "check": "npm run typecheck && npm run lint && npm run build && npm run check:countries && npm run check:schedule",
+        "check": "npm run typecheck && npm run lint && npm run build && npm run check:countries && npm run check:schedule && npm run check:fonts",
         "og": "tsx scripts/export-og.mts",
-        "fonts": "cp node_modules/@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2 node_modules/@fontsource-variable/roboto-mono/files/roboto-mono-latin-wght-normal.woff2 src/fonts/",
+        "fonts": "tsx scripts/subset-fonts.mts",
         "check:countries": "tsx scripts/check-countries.mts",
-        "check:schedule": "tsx scripts/check-schedule.mts"
+        "check:schedule": "tsx scripts/check-schedule.mts",
+        "check:fonts": "tsx scripts/check-fonts.mts"
     },
     "dependencies": {
         "lucide-react": "^1.33.0",
@@ -32,6 +33,7 @@
         "eslint": "^9",
         "eslint-config-next": "16.3.1",
         "sharp": "^0.35.3",
+        "subset-font": "^2.5.0",
         "tailwindcss": "^4",
         "tsx": "^4.20.3",
         "typescript": "^5"
@@ -40,5 +42,12 @@
         "unrs-resolver@1.12.2": true,
         "esbuild@0.28.2": true,
         "sharp@0.35.3": true
-    }
+    },
+    "browserslist": [
+        "chrome >= 111",
+        "edge >= 111",
+        "firefox >= 128",
+        "safari >= 16.4",
+        "not dead"
+    ]
 }
